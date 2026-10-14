@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3';
+import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
 
 type Result<T> = { ok: true, value: T } | { ok: false, error: string };
@@ -23,8 +23,8 @@ function decideDeposit(id: string, amountCents: number, at: string): Result<Depo
     else
         return { ok: true, value: { id: id, amountCents: amountCents, type: 'DepositMade', at: at } }
 }
-
-function decideWithdrawal(id: string, amountCents: number, balanceCents: number, at: string): Result<Withdrawal> {
+// pass CashAccount aggregate
+function decideWithdrawal(amountCents: number, at: string): Result<Withdrawal> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
         return { ok: false, error: 'the withdrawal amount is incorrect' }
     if (amountCents > balanceCents)
@@ -36,7 +36,12 @@ function decideWithdrawal(id: string, amountCents: number, balanceCents: number,
 
 type CashEvent = Deposit | Withdrawal;
 
-function cashBalance(events: CashEvent[]): number {
+interface CashAccount {
+    balanceCents: number,
+    id: string
+} // aggregate
+
+function cashBalance(events: CashEvent[]): Result<CashAccount> {
     let balance = 0;
     for (const event of events) {
         if (event.type === 'DepositMade') balance += event.amountCents;
@@ -58,7 +63,7 @@ interface EventRow {
 }
 
 class SqlEventStore implements EventStore {
-    constructor(private readonly db: Database.Database) {
+    constructor(private readonly db: DatabaseSync) {
         this.db.exec(`
             CREATE TABLE IF NOT EXISTS events (
                 stream  TEXT NOT NULL,
@@ -86,8 +91,8 @@ class SqlEventStore implements EventStore {
     }
 
     read(stream: string): CashEvent[] {
-        const rows = this.db.prepare(`SELECT seq, payload FROM events WHERE stream = ? ORDER BY seq`).all(stream) as EventRow[];
-        return rows.map((row) => JSON.parse(row.payload) as CashEvent);   // zod will replace this cast later
+        const rows = this.db.prepare(`SELECT seq, payload FROM events WHERE stream = ? ORDER BY seq`).all(stream) as unknown as EventRow[];
+        return rows.map((row) => JSON.parse(row.payload) as CashEvent);   // zod will replace this 
     }
 }
 
@@ -120,7 +125,7 @@ function withdraw(deps: Deps, amountCents: number): Result<void> {
 
 function main(): void {
     const deps: Deps = {
-        store: new SqlEventStore(new Database('data/events.sqlite')),
+        store: new SqlEventStore(new DatabaseSync('data/events.sqlite')),
         newId: () => randomUUID(),
         now: () => new Date().toISOString(),
     };
