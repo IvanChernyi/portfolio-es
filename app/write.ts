@@ -4,26 +4,52 @@ import { z } from 'zod';
 
 type Result<T> = { ok: true, value: T } | { ok: false, error: string };
 
-interface Deposit {
-    amountCents: number,
-    type: 'DepositMade'
-}
+const DepositSchema = z.object({
+    type: z.literal('DepositMade'), 
+    amountCents: z.number().int().positive() 
+});
 
-interface Withdrawal {
-    amountCents: number,
-    type: 'WithdrawalMade'
-}
+type Deposit = z.infer<typeof DepositSchema>;
+
+const WithdrawalSchema = z.object({ 
+    type: z.literal('WithdrawalMade'), 
+    amountCents: z.number().int().positive() 
+});
+
+type Withdrawal = z.infer<typeof WithdrawalSchema>;
 
 // zod - same two shapes. JSON goes through this before the domain is allowed to see it
 const AccountEventSchema = z.discriminatedUnion('type', [
-    z.object({ type: z.literal('DepositMade'), amountCents: z.number().int().positive() }),
-    z.object({ type: z.literal('WithdrawalMade'), amountCents: z.number().int().positive() }),
+    DepositSchema,
+    WithdrawalSchema
 ]);
+
+type AccountEvent = z.infer<typeof AccountEventSchema>;
 
 interface StoredEvent {
     id: string,
     at: string,
     event: AccountEvent
+}
+
+interface AccountEventV2 {
+    id: string,
+    at: string,
+    type: string
+} // zod this
+
+interface DepositEventV2 extends AccountEventV2 {
+    id: string,
+    at: string,
+    amountCents: number,
+    type: 'DepositMade'
+}
+
+interface WithdrawalEventV2 extends AccountEventV2 {
+    id: string,
+    at: string,
+    amountCents: number,
+    type: 'WithdrawalMade'
 }
 
 function decideDeposit(amountCents: number): Result<Deposit> {
@@ -43,15 +69,12 @@ function decideWithdrawal(account: Account, amountCents: number): Result<Withdra
 }
 
 
-type AccountEvent = Deposit | Withdrawal;
-
-
 interface Account {
     balanceCents: number,
     id: string
 } // aggregate
 
-function accountBalance(id: string, events: AccountEvent[]): Result<Account> {
+function foldAccountEvents(id: string, events: AccountEvent[]): Result<Account> {
     let balance = 0;
     for (const event of events) {
         if (event.type === 'DepositMade') balance += event.amountCents;
@@ -60,6 +83,7 @@ function accountBalance(id: string, events: AccountEvent[]): Result<Account> {
     }
     return { ok: true, value: { balanceCents: balance, id: id } };
 }
+// return result for an unknown case, what about zod
 
 // ES
 
@@ -129,6 +153,8 @@ interface Deps {
 
 const ACCOUNT_ID = 'main';
 
+// deposit and withdraw could be one apply?
+
 function deposit(deps: Deps, amountCents: number): Result<void> {
     const decided = decideDeposit(amountCents);
     if (!decided.ok) return decided;
@@ -138,7 +164,7 @@ function deposit(deps: Deps, amountCents: number): Result<void> {
 
 function withdraw(deps: Deps, amountCents: number): Result<void> {
 
-    const account = accountBalance(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
+    const account = foldAccountEvents(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
     if (!account.ok) return account;
 
     const decided = decideWithdrawal(account.value, amountCents);
@@ -170,7 +196,7 @@ function main(): void {
     console.log(`\nevents in stream "${ACCOUNT_ID}":`);
     for (const s of deps.store.readStored(ACCOUNT_ID)) console.log(' ', s.at, s.id.slice(0, 8), s.event.type.padEnd(15), s.event.amountCents);
 
-    const account = accountBalance(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
+    const account = foldAccountEvents(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
     console.log('\nbalance:', account.ok ? `${account.value.balanceCents} cents` : `FAILED: ${account.error}`);
 }
 
