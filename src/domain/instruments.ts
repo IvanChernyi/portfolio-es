@@ -1,5 +1,4 @@
-// Reference data: the ten stocks this simulator knows about.
-// Not events, not stored. A pure constant, so decide functions can use it.
+// reference data
 
 export interface Instrument {
     symbol: string;
