@@ -1,4 +1,4 @@
-// Composition root: the only place that names a file, the clock, or the id generator.
+// composition
 
 import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';

@@ -1,5 +1,4 @@
-// Domain: pure. Schemas, types, the Account aggregate, its fold and decide functions.
-// Imports nothing from the other folders.
+// account domain
 
 import { z } from 'zod';
 

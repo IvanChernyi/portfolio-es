@@ -1,4 +1,4 @@
-// Commands: read → fold → decide → append. No business rules here.
+// commands: read - fold - decide - append
 
 import { decideDeposit, decideWithdrawal, foldAccountEvents, Result } from '../domain/account';
 import { EventStore } from '../domain/eventStore';

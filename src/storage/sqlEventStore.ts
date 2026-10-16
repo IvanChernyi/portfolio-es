@@ -1,4 +1,4 @@
-// Storage edge: the only impure class. Adds the envelope on append, validates on read.
+// storage, impure
 
 import { DatabaseSync } from 'node:sqlite';
 import { AccountEvent, AccountEventSchema, AccountIntent } from '../domain/account';
