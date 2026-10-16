@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "write": "tsx app/write.ts",
+    "write": "tsx src/main.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
