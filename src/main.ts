@@ -8,11 +8,8 @@ import { ACCOUNT_ID, Deps, deposit, withdraw } from './commands/account';
 
 function main(): void {
     const deps: Deps = {
-        store: new SqlEventStore(
-            new DatabaseSync('data/events.sqlite'),
-            () => randomUUID(),
-            () => new Date().toISOString(),
-        ),
+        store: new SqlEventStore(new DatabaseSync('data/events.sqlite'), () => randomUUID()),
+        now: () => new Date().toISOString(),
     };
 
     const show = (label: string, result: Result<void>) =>
@@ -25,7 +22,7 @@ function main(): void {
     show('deposit 1.5 cents', deposit(deps, 1.5));
 
     console.log(`\nevents in stream "${ACCOUNT_ID}":`);
-    for (const e of deps.store.read(ACCOUNT_ID)) console.log(' ', e.at, e.id.slice(0, 8), e.type.padEnd(15), e.amountCents);
+    for (const e of deps.store.read(ACCOUNT_ID)) console.log(' ', e.at, e.id.slice(0, 8), e.type.padEnd(18), e.amountCents);
 
     const account = foldAccountEvents(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
     console.log('\nbalance:', account.ok ? `${account.value.balanceCents} cents` : `FAILED: ${account.error}`);
