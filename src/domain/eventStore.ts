@@ -1,8 +1,8 @@
 // the pure store
 
-import { AccountEvent, NewAccountEvent } from './account';
+import { AccountEvent } from './account';
 
 export interface EventStore {
-    append(stream: string, event: NewAccountEvent): boolean,   // the store mints the id
+    append(stream: string, event: AccountEvent): boolean,   // stores exactly what it is given
     read(stream: string): AccountEvent[]
 }

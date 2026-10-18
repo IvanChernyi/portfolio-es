@@ -8,8 +8,9 @@ import { ACCOUNT_ID, Deps, deposit, withdraw } from './commands/account';
 
 function main(): void {
     const deps: Deps = {
-        store: new SqlEventStore(new DatabaseSync('data/events.sqlite'), () => randomUUID()),
+        store: new SqlEventStore(new DatabaseSync('data/events.sqlite')),
         now: () => new Date().toISOString(),
+        newId: () => randomUUID(),
     };
 
     const show = (label: string, result: Result<void>) =>

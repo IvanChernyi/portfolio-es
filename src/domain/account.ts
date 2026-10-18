@@ -31,11 +31,6 @@ export type DepositCollectedEvent = z.infer<typeof DepositCollectedSchema>;
 export type WithdrawalSentEvent = z.infer<typeof WithdrawalSentSchema>;
 export type AccountEvent = z.infer<typeof AccountEventSchema>;
 
-// What a business function returns: the event minus the id the store will mint.
-export type NewDepositCollected = Omit<DepositCollectedEvent, 'id'>;
-export type NewWithdrawalSent = Omit<WithdrawalSentEvent, 'id'>;
-export type NewAccountEvent = NewDepositCollected | NewWithdrawalSent;
-
 export interface Account {
     balanceCents: number,
     id: string
@@ -51,20 +46,20 @@ export function foldAccountEvents(id: string, events: AccountEvent[]): Result<Ac
     return { ok: true, value: { balanceCents: balance, id: id } };
 }
 
-// Business verbs. Each takes the aggregate, the input, and the time.
+// Business verbs. Each takes the aggregate, the input, the time, and a fresh id — and returns a complete event.
 
-export function collectDeposit(account: Account, amountCents: number, now: string): Result<NewDepositCollected> {
+export function collectDeposit(account: Account, amountCents: number, now: string, id: string): Result<DepositCollectedEvent> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
         return { ok: false, error: 'the deposit amount is incorrect' }
     else
-        return { ok: true, value: { type: 'DepositCollected', amountCents: amountCents, at: now } }
+        return { ok: true, value: { id: id, type: 'DepositCollected', amountCents: amountCents, at: now } }
 }
 
-export function sendWithdrawal(account: Account, amountCents: number, now: string): Result<NewWithdrawalSent> {
+export function sendWithdrawal(account: Account, amountCents: number, now: string, id: string): Result<WithdrawalSentEvent> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
         return { ok: false, error: 'the withdrawal amount is incorrect' }
     if (amountCents > account.balanceCents)
         return { ok: false, error: 'insufficient cash' }
     else
-        return { ok: true, value: { type: 'WithdrawalSent', amountCents: amountCents, at: now } }
+        return { ok: true, value: { id: id, type: 'WithdrawalSent', amountCents: amountCents, at: now } }
 }

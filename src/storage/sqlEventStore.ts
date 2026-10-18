@@ -1,7 +1,7 @@
 // storage, impure
 
 import { DatabaseSync } from 'node:sqlite';
-import { AccountEvent, AccountEventSchema, NewAccountEvent } from '../domain/account';
+import { AccountEvent, AccountEventSchema } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
 
 interface EventRow {
@@ -9,7 +9,7 @@ interface EventRow {
 }
 
 export class SqlEventStore implements EventStore {
-    constructor(private readonly db: DatabaseSync, private readonly newId: () => string) {
+    constructor(private readonly db: DatabaseSync) {
         this.db.exec(`
             CREATE TABLE IF NOT EXISTS events (
                 stream  TEXT NOT NULL,
@@ -23,13 +23,12 @@ export class SqlEventStore implements EventStore {
         `);
     }
 
-    append(stream: string, event: NewAccountEvent): boolean {
-        const stored: AccountEvent = { ...event, id: this.newId() };   // the only thing the store adds
+    append(stream: string, event: AccountEvent): boolean {
         try {
             this.db.prepare(
                 `INSERT INTO events (stream, seq, id, type, at, payload)
                  VALUES (?, (SELECT COALESCE(MAX(seq), 0) + 1 FROM events WHERE stream = ?), ?, ?, ?, ?)`
-            ).run(stream, stream, stored.id, stored.type, stored.at, JSON.stringify(stored));
+            ).run(stream, stream, event.id, event.type, event.at, JSON.stringify(event));
             return true;
         } catch (err) {
             console.error(err);
