@@ -4,6 +4,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
 import { foldAccountEvents, Result } from './domain/account';
 import { SqlEventStore } from './storage/sqlEventStore';
+import { SqlPositionsReport } from './projections/positionsReport';
 import { ACCOUNT_ID, Deps, deposit, withdraw } from './commands/account';
 
 function main(): void {
@@ -23,10 +24,18 @@ function main(): void {
     show('deposit 1.5 cents', deposit(deps, 1.5));
 
     console.log(`\nevents in stream "${ACCOUNT_ID}":`);
-    for (const e of deps.store.read(ACCOUNT_ID)) console.log(' ', e.at, e.id.slice(0, 8), e.type.padEnd(18), e.amountCents);
+    for (const e of deps.store.read(ACCOUNT_ID)) {
+        const detail = e.type === 'StockBought' ? `${e.quantity} ${e.symbol} @ ${e.priceCents}` : String(e.amountCents);
+        console.log(' ', e.at, e.id.slice(0, 8), e.type.padEnd(18), detail);
+    }
 
     const account = foldAccountEvents(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
     console.log('\nbalance:', account.ok ? `${account.value.balanceCents} cents` : `FAILED: ${account.error}`);
+
+    // read side: rebuild the positions report from the events and show it
+    const report = new SqlPositionsReport(new DatabaseSync('data/reports.sqlite'));
+    report.rebuild(deps.store.read(ACCOUNT_ID));
+    console.log('\npositions report:', report.list());
 }
 
 main();
