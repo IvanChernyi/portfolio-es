@@ -1,7 +1,7 @@
 // account domain
 
 import { z } from 'zod';
-import { isKnownSymbol } from './instruments';
+import { isKnownStock } from './instruments';
 
 export type Result<T> = { ok: true, value: T } | { ok: false, error: string };
 
@@ -80,7 +80,7 @@ export interface StockOrder {
 }
 
 export function buyStock(account: Account, order: StockOrder, now: string, id: string): Result<StockBoughtEvent> {
-    if (!isKnownSymbol(order.symbol))
+    if (!isKnownStock(order.symbol))
         return { ok: false, error: `unknown symbol ${order.symbol}` }
     if (!(Number.isSafeInteger(order.quantity) && order.quantity > 0))
         return { ok: false, error: 'the quantity must be a positive whole number' }

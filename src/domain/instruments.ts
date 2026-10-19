@@ -1,11 +1,11 @@
 // reference data
 
-export interface Instrument {
+export interface Stock {
     symbol: string;
     name: string;
 }
 
-export const INSTRUMENTS: Instrument[] = [
+export const STOCKS: Stock[] = [
     { symbol: 'AAPL', name: 'Apple' },
     { symbol: 'MSFT', name: 'Microsoft' },
     { symbol: 'AMZN', name: 'Amazon' },
@@ -18,6 +18,6 @@ export const INSTRUMENTS: Instrument[] = [
     { symbol: 'XOM', name: 'Exxon Mobil' },
 ];
 
-export function isKnownSymbol(symbol: string): boolean {
-    return INSTRUMENTS.some((i) => i.symbol === symbol);
+export function isKnownStock(symbol: string): boolean {
+    return STOCKS.some((i) => i.symbol === symbol);
 }
