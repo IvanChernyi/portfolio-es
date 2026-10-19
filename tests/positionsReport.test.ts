@@ -12,9 +12,9 @@ const at = '2026-10-18T10:00:00.000Z';
 
 const events: AccountEvent[] = [
     { id: 'e1', at, type: 'DepositCollected', amountCents: 100_000 },
-    { id: 'e2', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 10_000 },
-    { id: 'e3', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 20_000 },
-    { id: 'e4', at, type: 'StockBought', symbol: 'MSFT', quantity: 1, priceCents: 30_000 },
+    { id: 'e2', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
+    { id: 'e3', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 20000 },
+    { id: 'e4', at, type: 'StockBought', symbol: 'MSFT', quantity: 1, priceCents: 30000 },
 ];
 
 describe('positionsFrom', () => {
@@ -34,7 +34,7 @@ describe('positionsFrom', () => {
 describe('fold with StockBought', () => {
     it('a buy spends cash', () => {
         const account = foldAccountEvents('main', events);
-        assert.equal(account.ok && account.value.balanceCents, 100_000 - 20_000 - 40_000 - 30_000);
+        assert.equal(account.ok && account.value.balanceCents, 100000 - 20000 - 40000 - 30000);
     });
 });
 
@@ -47,7 +47,7 @@ describe('buyStock', () => {
     it('refuses an unknown symbol, a bad quantity, and a cost above cash', () => {
         assert.equal(buyStock(account, { symbol: 'ZZZZ', quantity: 1, priceCents: 100 }, at, 'x').ok, false);
         assert.equal(buyStock(account, { symbol: 'AAPL', quantity: 1.5, priceCents: 100 }, at, 'x').ok, false);
-        assert.equal(buyStock(account, { symbol: 'AAPL', quantity: 3, priceCents: 20_000 }, at, 'x').ok, false);
+        assert.equal(buyStock(account, { symbol: 'AAPL', quantity: 3, priceCents: 20000 }, at, 'x').ok, false);
     });
 });
 
