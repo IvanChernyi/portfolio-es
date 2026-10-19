@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio ES</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1c1e21; --muted:#6b7280; --line:#e5e7eb; --accent:#2563eb; --ok-bg:#d1fae5; --ok-ink:#065f46; --err-bg:#fee2e2; --err-ink:#991b1b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width:960px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:22px; margin:0 0 4px; } .sub { color:var(--muted); font-size:13px; margin-bottom:20px; }
+  h2 { font-size:13px; margin:0 0 12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; } @media (max-width:720px){ .grid{grid-template-columns:1fr;} }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:end; }
+  label { display:grid; gap:4px; font-size:13px; color:var(--muted); flex:1; min-width:110px; }
+  input, select { font:inherit; padding:8px 10px; border:1px solid var(--line); border-radius:6px; width:100%; background:#fff; color:var(--ink); }
+  button { font:inherit; padding:8px 14px; border-radius:6px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .msg { margin-top:10px; padding:8px 12px; border-radius:6px; font-size:14px; min-height:1.4em; }
+  .msg.ok { background:var(--ok-bg); color:var(--ok-ink); } .msg.err { background:var(--err-bg); color:var(--err-ink); }
+  .stat .k { font-size:12px; color:var(--muted); } .stat .v { font-size:24px; font-weight:600; font-variant-numeric:tabular-nums; }
+  table { width:100%; border-collapse:collapse; } th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); }
+  th { font-size:12px; color:var(--muted); } td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td.mono { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; color:var(--muted); }
+  .empty { color:var(--muted); padding:12px 6px; } .tablewrap { overflow-x:auto; } [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Portfolio ES</h1>
+  <div class="sub">one account, one event stream, a positions report built from it</div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Cash</h2>
+      <div class="stat" style="margin-bottom:12px"><div class="k">Balance</div><div class="v" id="balance">–</div></div>
+      <form id="cash-form" class="row">
+        <label>Amount ($)<input name="amount" type="number" step="0.01" min="0.01" required placeholder="1000"></label>
+        <button type="submit" data-act="deposits">Deposit</button>
+        <button type="submit" class="ghost" data-act="withdrawals">Withdraw</button>
+      </form>
+      <div class="msg" id="cash-msg"></div>
+    </section>
+
+    <section class="card">
+      <h2>Buy stock</h2>
+      <form id="order-form">
+        <div class="row">
+          <label>Stock<select name="symbol" id="symbol"></select></label>
+          <label>Shares<input name="quantity" type="number" step="1" min="1" required placeholder="10"></label>
+          <label>Price per share ($)<input name="price" type="number" step="0.01" min="0.01" required placeholder="150.00"></label>
+          <button type="submit">Buy</button>
+        </div>
+      </form>
+      <div class="msg" id="order-msg"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Positions report</h2>
+    <div class="tablewrap">
+      <table><thead><tr><th>Symbol</th><th class="num">Shares</th><th class="num">Avg cost</th><th class="num">Cost basis</th></tr></thead><tbody id="positions"></tbody></table>
+      <div class="empty" id="positions-empty" hidden>No positions yet.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Event stream "main"</h2>
+    <div class="tablewrap">
+      <table><thead><tr><th>At</th><th>Id</th><th>Event</th><th>Detail</th></tr></thead><tbody id="events"></tbody></table>
+      <div class="empty" id="events-empty" hidden>No events yet. Make a deposit.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const fmt = (c) => '$' + (c / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const toCents = (d) => Math.round(Number(d) * 100);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  async function api(method, url, body) {
+    const res = await fetch(url, { method, headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+  function show(id, text, kind) { const el = $(id); el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); }
+
+  async function render() {
+    const [account, positions, events] = await Promise.all([api('GET', '/api/account'), api('GET', '/api/positions'), api('GET', '/api/events')]);
+    $('balance').textContent = fmt(account.balanceCents);
+
+    const ptb = $('positions'); ptb.innerHTML = ''; $('positions-empty').hidden = positions.length > 0;
+    for (const p of positions) ptb.insertAdjacentHTML('beforeend',
+      `<tr><td>${esc(p.symbol)}</td><td class="num">${p.quantity}</td><td class="num">${fmt(p.avgCostCents)}</td><td class="num">${fmt(p.quantity * p.avgCostCents)}</td></tr>`);
+
+    const etb = $('events'); etb.innerHTML = ''; $('events-empty').hidden = events.length > 0;
+    for (const e of [...events].reverse()) {
+      const detail = e.type === 'StockBought' ? `${e.quantity} × ${esc(e.symbol)} @ ${fmt(e.priceCents)}` : fmt(e.amountCents);
+      etb.insertAdjacentHTML('beforeend',
+        `<tr><td class="mono">${esc(e.at.slice(0, 19).replace('T', ' '))}</td><td class="mono">${esc(e.id.slice(0, 8))}</td><td>${esc(e.type)}</td><td>${detail}</td></tr>`);
+    }
+  }
+
+  async function loadStocks() {
+    const stocks = await api('GET', '/api/stocks');
+    $('symbol').innerHTML = stocks.map((s) => `<option value="${esc(s.symbol)}">${esc(s.symbol)} · ${esc(s.name)}</option>`).join('');
+  }
+
+  let cashAction = 'deposits';
+  $('cash-form').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => { cashAction = b.dataset.act; }));
+  $('cash-form').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const f = ev.target;
+    try {
+      await api('POST', '/api/' + cashAction, { amountCents: toCents(f.amount.value) });
+      show('cash-msg', `${cashAction === 'deposits' ? 'Deposit collected' : 'Withdrawal sent'}: ${fmt(toCents(f.amount.value))}`, 'ok');
+      f.reset(); await render();
+    } catch (err) { show('cash-msg', err.message, 'err'); }
+  });
+
+  $('order-form').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const f = ev.target;
+    const order = { symbol: f.symbol.value, quantity: Number(f.quantity.value), priceCents: toCents(f.price.value) };
+    try {
+      await api('POST', '/api/orders', order);
+      show('order-msg', `Stock bought: ${order.quantity} × ${order.symbol} @ ${fmt(order.priceCents)}`, 'ok');
+      f.quantity.value = f.price.value = ''; await render();
+    } catch (err) { show('order-msg', err.message, 'err'); }
+  });
+
+  loadStocks().then(render).catch((err) => show('cash-msg', 'Could not load: ' + err.message, 'err'));
+</script>
+</body>
+</html>

@@ -1,5 +1,4 @@
-// Read side: the positions report. Built from the events, shown by the UI.
-// The write side does not read this table; the fold protects invariants on its own.
+// read side
 
 import { DatabaseSync } from 'node:sqlite';
 import { AccountEvent } from '../domain/account';
@@ -10,7 +9,7 @@ export interface Position {
     avgCostCents: number
 }
 
-// Pure: events in, positions out. The projector's arithmetic, testable without a database.
+// pure, events in, positions out. testable without a database.
 export function positionsFrom(events: AccountEvent[]): Position[] {
     const bySymbol: Record<string, Position> = {};
     for (const event of events) {
@@ -40,8 +39,7 @@ export class SqlPositionsReport {
         `);
     }
 
-    // Wipe and rebuild from all events. Simple and always correct; incremental
-    // checkpoints come when the stream is long enough to need them.
+    // wipe and rebuild from events. no incremental checkpoints yet
     rebuild(events: AccountEvent[]): void {
         this.db.exec(`DELETE FROM positions_report`);
         const insert = this.db.prepare(`INSERT INTO positions_report (symbol, quantity, avg_cost_cents) VALUES (?, ?, ?)`);

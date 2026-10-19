@@ -1,6 +1,6 @@
 // commands: read - fold - business verb - append
 
-import { collectDeposit, foldAccountEvents, Result, sendWithdrawal } from '../domain/account';
+import { buyStock, collectDeposit, foldAccountEvents, Result, sendWithdrawal, StockOrder } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
 
 export interface Deps {
@@ -28,5 +28,15 @@ export function withdraw(deps: Deps, amountCents: number): Result<void> {
     const sent = sendWithdrawal(account.value, amountCents, deps.now(), deps.newId());
     if (!sent.ok) return sent;
     if (!deps.store.append(ACCOUNT_ID, sent.value)) return { ok: false, error: 'could not store the withdrawal' };
+    return { ok: true, value: undefined };
+}
+
+export function buy(deps: Deps, order: StockOrder): Result<void> {
+    const account = foldAccountEvents(ACCOUNT_ID, deps.store.read(ACCOUNT_ID));
+    if (!account.ok) return account;
+
+    const bought = buyStock(account.value, order, deps.now(), deps.newId());
+    if (!bought.ok) return bought;
+    if (!deps.store.append(ACCOUNT_ID, bought.value)) return { ok: false, error: 'could not store the purchase' };
     return { ok: true, value: undefined };
 }
