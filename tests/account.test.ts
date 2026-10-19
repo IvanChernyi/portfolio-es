@@ -1,5 +1,4 @@
-// Pure domain tests: no store, no clock, no fakes. Build an account by hand,
-// call the business verb, look at the event it returns.
+// pure domain tests
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';

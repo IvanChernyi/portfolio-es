@@ -1,4 +1,4 @@
-// http edge: translate the request, delegate, answer. no business rules here.
+// http edge: translate the request, delegate, answer. no business rules here. ! GENERATED !
 
 import express from 'express';
 import { z } from 'zod';

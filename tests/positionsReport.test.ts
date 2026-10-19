@@ -1,5 +1,5 @@
 // No mocks: the pure projection is tested on hand-written events,
-// the SQL report against a real in-memory database.
+// the SQL report against a real in-memory database. ! GENERATED !
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
