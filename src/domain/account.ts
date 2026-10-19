@@ -57,8 +57,6 @@ export function foldAccountEvents(id: string, events: AccountEvent[]): Result<Ac
     return { ok: true, value: { balanceCents: balance, id: id } };
 }
 
-// Business verbs. Each takes the aggregate, the input, the time, and a fresh id — and returns a complete event.
-
 export function collectDeposit(account: Account, amountCents: number, now: string, id: string): Result<DepositCollectedEvent> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
         return { ok: false, error: 'the deposit amount is incorrect' }
@@ -75,21 +73,21 @@ export function sendWithdrawal(account: Account, amountCents: number, now: strin
         return { ok: true, value: { id: id, type: 'WithdrawalSent', amountCents: amountCents, at: now } }
 }
 
-export interface BuyInput {
+export interface StockOrder {
     symbol: string,
     quantity: number,
     priceCents: number
 }
 
-export function buyStock(account: Account, input: BuyInput, now: string, id: string): Result<StockBoughtEvent> {
-    if (!isKnownSymbol(input.symbol))
-        return { ok: false, error: `unknown symbol ${input.symbol}` }
-    if (!(Number.isSafeInteger(input.quantity) && input.quantity > 0))
+export function buyStock(account: Account, order: StockOrder, now: string, id: string): Result<StockBoughtEvent> {
+    if (!isKnownSymbol(order.symbol))
+        return { ok: false, error: `unknown symbol ${order.symbol}` }
+    if (!(Number.isSafeInteger(order.quantity) && order.quantity > 0))
         return { ok: false, error: 'the quantity must be a positive whole number' }
-    if (!(Number.isSafeInteger(input.priceCents) && input.priceCents > 0))
+    if (!(Number.isSafeInteger(order.priceCents) && order.priceCents > 0))
         return { ok: false, error: 'the price must be a positive whole number of cents' }
-    if (input.quantity * input.priceCents > account.balanceCents)
+    if (order.quantity * order.priceCents > account.balanceCents)
         return { ok: false, error: 'insufficient cash' }
     else
-        return { ok: true, value: { id: id, type: 'StockBought', symbol: input.symbol, quantity: input.quantity, priceCents: input.priceCents, at: now } }
+        return { ok: true, value: { id: id, type: 'StockBought', symbol: order.symbol, quantity: order.quantity, priceCents: order.priceCents, at: now } }
 }
