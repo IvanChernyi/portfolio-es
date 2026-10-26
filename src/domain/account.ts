@@ -29,38 +29,69 @@ export const StockBoughtSchema = AccountEventBase.extend({
     priceCents: z.number().int().positive(),
 });
 
+export const StockSoldSchema = AccountEventBase.extend({
+    type: z.literal('StockSold'),
+    symbol: z.string(),
+    quantity: z.number().int().positive(),
+    priceCents: z.number().int().positive(),
+});
+
 // JSON from disk goes through this before the domain is allowed to see it
 export const AccountEventSchema = z.discriminatedUnion('type', [
     DepositCollectedSchema,
     WithdrawalSentSchema,
-    StockBoughtSchema
+    StockBoughtSchema,
+    StockSoldSchema
 ]);
 
 export type DepositCollectedEvent = z.infer<typeof DepositCollectedSchema>;
 export type WithdrawalSentEvent = z.infer<typeof WithdrawalSentSchema>;
 export type StockBoughtEvent = z.infer<typeof StockBoughtSchema>;
+export type StockSoldEvent = z.infer<typeof StockSoldSchema>;
 export type AccountEvent = z.infer<typeof AccountEventSchema>;
 
+// What the account holds of one stock. Part of the aggregate because
+// "cannot sell what you do not hold" needs it.
+export interface Position {
+    symbol: string,
+    quantity: number,
+    avgCostCents: number
+}
+
 export interface Account {
+    id: string,
     balanceCents: number,
-    id: string
+    positions: Position[]
 } // aggregate
 
-// Left fold: events in, aggregate out. The id comes from the events themselves.
+// left fold: events in, aggregate out. the id comes from the events themselves
 export function foldAccountEvents(events: AccountEvent[]): Result<Account> {
     const first = events[0];
     if (!first) return { ok: false, error: 'no events' };
     let balance = 0;
+    const held: Record<string, Position> = {};
     for (const event of events) {
         if (event.type === 'DepositCollected') balance += event.amountCents;
         else if (event.type === 'WithdrawalSent') balance -= event.amountCents;
-        else if (event.type === 'StockBought') balance -= event.quantity * event.priceCents;   // positions live in the report, not here (until sell needs them)
+        else if (event.type === 'StockBought') {
+            balance -= event.quantity * event.priceCents;
+            const p = held[event.symbol] ?? { symbol: event.symbol, quantity: 0, avgCostCents: 0 };
+            const quantity = p.quantity + event.quantity;
+            const avgCostCents = Math.round((p.quantity * p.avgCostCents + event.quantity * event.priceCents) / quantity);
+            held[event.symbol] = { symbol: event.symbol, quantity, avgCostCents };
+        }
+        else if (event.type === 'StockSold') {
+            balance += event.quantity * event.priceCents;
+            const p = held[event.symbol] ?? { symbol: event.symbol, quantity: 0, avgCostCents: 0 };
+            held[event.symbol] = { symbol: p.symbol, quantity: p.quantity - event.quantity, avgCostCents: p.avgCostCents };   // selling does not change the average cost of what remains
+        }
         else return { ok: false, error: 'unknown event type' };
     }
-    return { ok: true, value: { balanceCents: balance, id: first.id } };
+    const positions = Object.values(held).filter((p) => p.quantity > 0);
+    return { ok: true, value: { id: first.id, balanceCents: balance, positions } };
 }
 
-// Business verbs: (aggregate, input, time) -> the events that happened. Usually one, sometimes more.
+// business verbs: (aggregate, input, time) -> the events that happened
 
 export function collectDeposit(account: Account, amountCents: number, now: string): Result<AccountEvent[]> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
@@ -95,4 +126,18 @@ export function buyStock(account: Account, order: StockOrder, now: string): Resu
         return { ok: false, error: 'insufficient cash' }
     else
         return { ok: true, value: [{ id: account.id, type: 'StockBought', symbol: order.symbol, quantity: order.quantity, priceCents: order.priceCents, at: now }] }
+}
+
+export function sellStock(account: Account, order: StockOrder, now: string): Result<AccountEvent[]> {
+    if (!isKnownStock(order.symbol))
+        return { ok: false, error: `unknown symbol ${order.symbol}` }
+    if (!(Number.isSafeInteger(order.quantity) && order.quantity > 0))
+        return { ok: false, error: 'the quantity must be a positive whole number' }
+    if (!(Number.isSafeInteger(order.priceCents) && order.priceCents > 0))
+        return { ok: false, error: 'the price must be a positive whole number of cents' }
+    const held = account.positions.find((p) => p.symbol === order.symbol);
+    if (!held || held.quantity < order.quantity)
+        return { ok: false, error: `not enough ${order.symbol} shares to sell` }
+    else
+        return { ok: true, value: [{ id: account.id, type: 'StockSold', symbol: order.symbol, quantity: order.quantity, priceCents: order.priceCents, at: now }] }
 }

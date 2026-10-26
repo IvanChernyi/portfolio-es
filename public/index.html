@@ -25,6 +25,8 @@
   th { font-size:12px; color:var(--muted); } td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
   td.mono { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; color:var(--muted); }
   .empty { color:var(--muted); padding:12px 6px; } .tablewrap { overflow-x:auto; } [hidden]{ display:none !important; }
+  .pos { color:#059669; } .neg { color:#dc2626; } tr.closed td { color:var(--muted); }
+  button.sell { background:#dc2626; border-color:#dc2626; }
 </style>
 </head>
 <body>
@@ -45,13 +47,14 @@
     </section>
 
     <section class="card">
-      <h2>Buy stock</h2>
+      <h2>Trade stock</h2>
       <form id="order-form">
         <div class="row">
           <label>Stock<select name="symbol" id="symbol"></select></label>
           <label>Shares<input name="quantity" type="number" step="1" min="1" required placeholder="10"></label>
           <label>Price per share ($)<input name="price" type="number" step="0.01" min="0.01" required placeholder="150.00"></label>
-          <button type="submit">Buy</button>
+          <button type="submit" data-side="buy">Buy</button>
+          <button type="submit" class="sell" data-side="sell">Sell</button>
         </div>
       </form>
       <div class="msg" id="order-msg"></div>
@@ -61,7 +64,7 @@
   <section class="card">
     <h2>Positions report</h2>
     <div class="tablewrap">
-      <table><thead><tr><th>Symbol</th><th class="num">Shares</th><th class="num">Avg cost</th><th class="num">Cost basis</th></tr></thead><tbody id="positions"></tbody></table>
+      <table><thead><tr><th>Symbol</th><th class="num">Shares</th><th class="num">Avg cost</th><th class="num">Cost basis</th><th class="num">Realized P&amp;L</th></tr></thead><tbody id="positions"></tbody></table>
       <div class="empty" id="positions-empty" hidden>No positions yet.</div>
     </div>
   </section>
@@ -79,6 +82,7 @@
   const $ = (id) => document.getElementById(id);
   const fmt = (c) => '$' + (c / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const toCents = (d) => Math.round(Number(d) * 100);
+  const signed = (c) => (c < 0 ? '-' : '') + fmt(Math.abs(c));
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
   async function api(method, url, body) {
@@ -95,11 +99,11 @@
 
     const ptb = $('positions'); ptb.innerHTML = ''; $('positions-empty').hidden = positions.length > 0;
     for (const p of positions) ptb.insertAdjacentHTML('beforeend',
-      `<tr><td>${esc(p.symbol)}</td><td class="num">${p.quantity}</td><td class="num">${fmt(p.avgCostCents)}</td><td class="num">${fmt(p.quantity * p.avgCostCents)}</td></tr>`);
+      `<tr class="${p.quantity === 0 ? 'closed' : ''}"><td>${esc(p.symbol)}${p.quantity === 0 ? ' (closed)' : ''}</td><td class="num">${p.quantity}</td><td class="num">${fmt(p.avgCostCents)}</td><td class="num">${fmt(p.quantity * p.avgCostCents)}</td><td class="num ${p.realizedPnlCents > 0 ? 'pos' : p.realizedPnlCents < 0 ? 'neg' : ''}">${signed(p.realizedPnlCents)}</td></tr>`);
 
     const etb = $('events'); etb.innerHTML = ''; $('events-empty').hidden = events.length > 0;
     events.forEach((e, i) => {
-      const detail = e.type === 'StockBought' ? `${e.quantity} × ${esc(e.symbol)} @ ${fmt(e.priceCents)}` : fmt(e.amountCents);
+      const detail = e.type === 'StockBought' || e.type === 'StockSold' ? `${e.quantity} × ${esc(e.symbol)} @ ${fmt(e.priceCents)}` : fmt(e.amountCents);
       etb.insertAdjacentHTML('afterbegin',
         `<tr><td class="mono">${i + 1}</td><td class="mono">${esc(e.at.slice(0, 19).replace('T', ' '))}</td><td>${esc(e.type)}</td><td>${detail}</td></tr>`);
     });
@@ -122,13 +126,15 @@
     } catch (err) { show('cash-msg', err.message, 'err'); }
   });
 
+  let side = 'buy';
+  $('order-form').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => { side = b.dataset.side; }));
   $('order-form').addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const f = ev.target;
-    const order = { symbol: f.symbol.value, quantity: Number(f.quantity.value), priceCents: toCents(f.price.value) };
+    const order = { side, symbol: f.symbol.value, quantity: Number(f.quantity.value), priceCents: toCents(f.price.value) };
     try {
       await api('POST', '/api/orders', order);
-      show('order-msg', `Stock bought: ${order.quantity} × ${order.symbol} @ ${fmt(order.priceCents)}`, 'ok');
+      show('order-msg', `Stock ${side === 'sell' ? 'sold' : 'bought'}: ${order.quantity} × ${order.symbol} @ ${fmt(order.priceCents)}`, 'ok');
       f.quantity.value = f.price.value = ''; await render();
     } catch (err) { show('order-msg', err.message, 'err'); }
   });

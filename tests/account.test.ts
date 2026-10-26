@@ -2,12 +2,12 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { Account, AccountEvent, collectDeposit, foldAccountEvents, sendWithdrawal } from '../src/domain/account';
+import { Account, AccountEvent, collectDeposit, foldAccountEvents, sellStock, sendWithdrawal } from '../src/domain/account';
 
 const at = '2026-10-19T10:00:00.000Z';
 
-const empty: Account = { id: 'main', balanceCents: 0 };
-const funded: Account = { id: 'main', balanceCents: 50000 };
+const empty: Account = { id: 'main', balanceCents: 0, positions: [] };
+const funded: Account = { id: 'main', balanceCents: 50000, positions: [] };
 
 describe('collectDeposit', () => {
     it('returns a DepositCollected event stamped with the account and the time', () => {
@@ -62,7 +62,7 @@ describe('foldAccountEvents', () => {
             { id: 'main', at, type: 'DepositCollected', amountCents: 20000 },
             { id: 'main', at, type: 'WithdrawalSent', amountCents: 3000 },
         ];
-        assert.deepEqual(foldAccountEvents(events), { ok: true, value: { id: 'main', balanceCents: 17000 } });
+        assert.deepEqual(foldAccountEvents(events), { ok: true, value: { id: 'main', balanceCents: 17000, positions: [] } });
     });
 
     it('cannot build an account from no events', () => {
@@ -93,6 +93,51 @@ describe('foldAccountEvents', () => {
 
         assert.equal(account.balanceCents, 6500);
         assert.equal(events.length, 3);
+    });
+});
+
+describe('sellStock', () => {
+    const holding: Account = { id: 'main', balanceCents: 0, positions: [{ symbol: 'AAPL', quantity: 3, avgCostCents: 10000 }] };
+
+    it('returns a StockSold event when enough shares are held', () => {
+        const result = sellStock(holding, { symbol: 'AAPL', quantity: 2, priceCents: 12000 }, at);
+        assert.deepEqual(result, {
+            ok: true,
+            value: [{ id: 'main', type: 'StockSold', symbol: 'AAPL', quantity: 2, priceCents: 12000, at }],
+        });
+    });
+
+    it('allows selling exactly what is held, refuses one share more', () => {
+        assert.equal(sellStock(holding, { symbol: 'AAPL', quantity: 3, priceCents: 100 }, at).ok, true);
+        assert.deepEqual(sellStock(holding, { symbol: 'AAPL', quantity: 4, priceCents: 100 }, at), { ok: false, error: 'not enough AAPL shares to sell' });
+    });
+
+    it('refuses a stock that is not held at all', () => {
+        assert.equal(sellStock(holding, { symbol: 'MSFT', quantity: 1, priceCents: 100 }, at).ok, false);
+    });
+});
+
+describe('foldAccountEvents with trades', () => {
+    it('a buy opens a position and a sell shrinks it; cash moves the other way', () => {
+        const events: AccountEvent[] = [
+            { id: 'main', at, type: 'DepositCollected', amountCents: 100000 },
+            { id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 4, priceCents: 10000 },
+            { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 1, priceCents: 15000 },
+        ];
+        assert.deepEqual(foldAccountEvents(events), {
+            ok: true,
+            value: { id: 'main', balanceCents: 100000 - 40000 + 15000, positions: [{ symbol: 'AAPL', quantity: 3, avgCostCents: 10000 }] },
+        });
+    });
+
+    it('a fully sold position leaves the aggregate', () => {
+        const events: AccountEvent[] = [
+            { id: 'main', at, type: 'DepositCollected', amountCents: 100000 },
+            { id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
+            { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
+        ];
+        const folded = foldAccountEvents(events);
+        assert.deepEqual(folded.ok && folded.value.positions, []);
     });
 });
 

@@ -2,14 +2,14 @@
 
 import express from 'express';
 import { z } from 'zod';
-import { ACCOUNT_ID, buy, Deps, deposit, loadAccount, withdraw } from '../commands/account';
+import { ACCOUNT_ID, buy, Deps, deposit, loadAccount, sell, withdraw } from '../commands/account';
 import { Result } from '../domain/account';
 import { STOCKS } from '../domain/instruments';
 import { SqlPositionsReport } from '../projections/positionsReport';
 
 // zod at the edge: request bodies come from outside the world
 const AmountBody = z.object({ amountCents: z.number().int().positive() });
-const OrderBody = z.object({ symbol: z.string(), quantity: z.number().int().positive(), priceCents: z.number().int().positive() });
+const OrderBody = z.object({ side: z.enum(['buy', 'sell']), symbol: z.string(), quantity: z.number().int().positive(), priceCents: z.number().int().positive() });
 
 // the one translator from a Result to an HTTP answer
 function reply(res: express.Response, result: Result<unknown>): void {
@@ -36,8 +36,9 @@ export function createApp(deps: Deps, report: SqlPositionsReport): express.Expre
 
     app.post('/api/orders', (req, res) => {
         const body = OrderBody.safeParse(req.body);
-        if (!body.success) return reply(res, { ok: false, error: 'symbol, quantity and priceCents are required' });
-        reply(res, buy(deps, { ...body.data, symbol: body.data.symbol.toUpperCase() }));
+        if (!body.success) return reply(res, { ok: false, error: 'side, symbol, quantity and priceCents are required' });
+        const order = { symbol: body.data.symbol.toUpperCase(), quantity: body.data.quantity, priceCents: body.data.priceCents };
+        reply(res, body.data.side === 'sell' ? sell(deps, order) : buy(deps, order));
     });
 
     // read side

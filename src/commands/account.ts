@@ -1,6 +1,6 @@
 // commands (app layer): read - fold - business verb - append. feeds the deps, no tech concerns.
 
-import { Account, AccountEvent, buyStock, collectDeposit, foldAccountEvents, Result, sendWithdrawal, StockOrder } from '../domain/account';
+import { Account, AccountEvent, buyStock, collectDeposit, foldAccountEvents, Result, sellStock, sendWithdrawal, StockOrder } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
 
 export interface Deps {
@@ -13,7 +13,7 @@ export const ACCOUNT_ID = 'main';   // the one stream this app has
 // A stream nobody has written to yet is a new account with nothing in it.
 export function loadAccount(deps: Deps): Result<Account> {
     const events = deps.store.read(ACCOUNT_ID);
-    if (events.length === 0) return { ok: true, value: { id: ACCOUNT_ID, balanceCents: 0 } };
+    if (events.length === 0) return { ok: true, value: { id: ACCOUNT_ID, balanceCents: 0, positions: [] } };
     return foldAccountEvents(events);
 }
 
@@ -49,4 +49,13 @@ export function buy(deps: Deps, order: StockOrder): Result<void> {
     const bought = buyStock(account.value, order, deps.now());
     if (!bought.ok) return bought;
     return appendAll(deps, bought.value, 'purchase');
+}
+
+export function sell(deps: Deps, order: StockOrder): Result<void> {
+    const account = loadAccount(deps);
+    if (!account.ok) return account;
+
+    const sold = sellStock(account.value, order, deps.now());
+    if (!sold.ok) return sold;
+    return appendAll(deps, sold.value, 'sale');
 }

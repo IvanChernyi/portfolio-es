@@ -20,8 +20,8 @@ const events: AccountEvent[] = [
 describe('positionsFrom', () => {
     it('averages the cost across buys of the same symbol', () => {
         assert.deepEqual(positionsFrom(events), [
-            { symbol: 'AAPL', quantity: 4, avgCostCents: 15_000 },
-            { symbol: 'MSFT', quantity: 1, avgCostCents: 30_000 },
+            { symbol: 'AAPL', quantity: 4, avgCostCents: 15_000, realizedPnlCents: 0 },
+            { symbol: 'MSFT', quantity: 1, avgCostCents: 30_000, realizedPnlCents: 0 },
         ]);
     });
 
@@ -39,7 +39,7 @@ describe('fold with StockBought', () => {
 });
 
 describe('buyStock', () => {
-    const account = { id: 'main', balanceCents: 50_000 };
+    const account = { id: 'main', balanceCents: 50_000, positions: [] };
     it('returns a StockBought event when the symbol is known and cash suffices', () => {
         const result = buyStock(account, { symbol: 'AAPL', quantity: 2, priceCents: 20_000 }, at);
         assert.deepEqual(result, { ok: true, value: [{ id: 'main', type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 20_000, at }] });
@@ -60,5 +60,18 @@ describe('SqlPositionsReport', () => {
         report.rebuild(store.read('main'));
         report.rebuild(store.read('main'));
         assert.deepEqual(report.list(), positionsFrom(events));
+    });
+});
+
+describe('positionsFrom with sells', () => {
+    it('realizes profit against the average cost and keeps a closed row', () => {
+        const sold: AccountEvent[] = [
+            ...events,
+            { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 4, priceCents: 20000 },
+        ];
+        assert.deepEqual(positionsFrom(sold), [
+            { symbol: 'AAPL', quantity: 0, avgCostCents: 15_000, realizedPnlCents: (20000 - 15000) * 4 },
+            { symbol: 'MSFT', quantity: 1, avgCostCents: 30_000, realizedPnlCents: 0 },
+        ]);
     });
 });
