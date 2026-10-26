@@ -14,7 +14,7 @@ export class SqlEventStore implements EventStore {
             CREATE TABLE IF NOT EXISTS events (
                 stream  TEXT NOT NULL,
                 seq     INTEGER NOT NULL,
-                id      TEXT NOT NULL UNIQUE,
+                account TEXT NOT NULL,
                 type    TEXT NOT NULL,
                 at      TEXT NOT NULL,
                 payload TEXT NOT NULL,
@@ -26,7 +26,7 @@ export class SqlEventStore implements EventStore {
     append(stream: string, event: AccountEvent): boolean {
         try {
             this.db.prepare(
-                `INSERT INTO events (stream, seq, id, type, at, payload)
+                `INSERT INTO events (stream, seq, account, type, at, payload)
                  VALUES (?, (SELECT COALESCE(MAX(seq), 0) + 1 FROM events WHERE stream = ?), ?, ?, ?, ?)`
             ).run(stream, stream, event.id, event.type, event.at, JSON.stringify(event));
             return true;

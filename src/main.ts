@@ -1,8 +1,7 @@
-// composition: the only place that names a file, the clock, or the id generator
+// composition: the only place that names a file or the clock
 
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
-import { randomUUID } from 'node:crypto';
 import express from 'express';
 import { SqlEventStore } from './storage/sqlEventStore';
 import { SqlPositionsReport } from './projections/positionsReport';
@@ -13,7 +12,6 @@ function main(): void {
     const deps: Deps = {
         store: new SqlEventStore(new DatabaseSync('data/events.sqlite')),
         now: () => new Date().toISOString(),
-        newId: () => randomUUID(),
     };
     const report = new SqlPositionsReport(new DatabaseSync('data/reports.sqlite'));
 

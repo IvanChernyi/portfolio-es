@@ -69,7 +69,7 @@
   <section class="card">
     <h2>Event stream "main"</h2>
     <div class="tablewrap">
-      <table><thead><tr><th>At</th><th>Id</th><th>Event</th><th>Detail</th></tr></thead><tbody id="events"></tbody></table>
+      <table><thead><tr><th>#</th><th>At</th><th>Event</th><th>Detail</th></tr></thead><tbody id="events"></tbody></table>
       <div class="empty" id="events-empty" hidden>No events yet. Make a deposit.</div>
     </div>
   </section>
@@ -98,11 +98,11 @@
       `<tr><td>${esc(p.symbol)}</td><td class="num">${p.quantity}</td><td class="num">${fmt(p.avgCostCents)}</td><td class="num">${fmt(p.quantity * p.avgCostCents)}</td></tr>`);
 
     const etb = $('events'); etb.innerHTML = ''; $('events-empty').hidden = events.length > 0;
-    for (const e of [...events].reverse()) {
+    events.forEach((e, i) => {
       const detail = e.type === 'StockBought' ? `${e.quantity} × ${esc(e.symbol)} @ ${fmt(e.priceCents)}` : fmt(e.amountCents);
-      etb.insertAdjacentHTML('beforeend',
-        `<tr><td class="mono">${esc(e.at.slice(0, 19).replace('T', ' '))}</td><td class="mono">${esc(e.id.slice(0, 8))}</td><td>${esc(e.type)}</td><td>${detail}</td></tr>`);
-    }
+      etb.insertAdjacentHTML('afterbegin',
+        `<tr><td class="mono">${i + 1}</td><td class="mono">${esc(e.at.slice(0, 19).replace('T', ' '))}</td><td>${esc(e.type)}</td><td>${detail}</td></tr>`);
+    });
   }
 
   async function loadStocks() {

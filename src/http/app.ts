@@ -2,8 +2,8 @@
 
 import express from 'express';
 import { z } from 'zod';
-import { ACCOUNT_ID, buy, Deps, deposit, withdraw } from '../commands/account';
-import { foldAccountEvents, Result } from '../domain/account';
+import { ACCOUNT_ID, buy, Deps, deposit, loadAccount, withdraw } from '../commands/account';
+import { Result } from '../domain/account';
 import { STOCKS } from '../domain/instruments';
 import { SqlPositionsReport } from '../projections/positionsReport';
 
@@ -46,7 +46,7 @@ export function createApp(deps: Deps, report: SqlPositionsReport): express.Expre
     });
 
     app.get('/api/account', (_req, res) => {
-        reply(res, foldAccountEvents(ACCOUNT_ID, deps.store.read(ACCOUNT_ID)));
+        reply(res, loadAccount(deps));
     });
 
     app.get('/api/positions', (_req, res) => {

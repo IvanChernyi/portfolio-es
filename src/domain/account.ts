@@ -7,7 +7,7 @@ export type Result<T> = { ok: true, value: T } | { ok: false, error: string };
 
 // Events: past-tense facts. id and at are declared once in the base.
 export const AccountEventBase = z.object({
-    id: z.string(),
+    id: z.string(),      // the account the event belongs to; an event's own identity is its (stream, seq)
     at: z.string(),      // when it happened — passed in, not "now"
     type: z.string(),
 });
@@ -46,7 +46,10 @@ export interface Account {
     id: string
 } // aggregate
 
-export function foldAccountEvents(id: string, events: AccountEvent[]): Result<Account> {
+// Left fold: events in, aggregate out. The id comes from the events themselves.
+export function foldAccountEvents(events: AccountEvent[]): Result<Account> {
+    const first = events[0];
+    if (!first) return { ok: false, error: 'no events' };
     let balance = 0;
     for (const event of events) {
         if (event.type === 'DepositCollected') balance += event.amountCents;
@@ -54,23 +57,25 @@ export function foldAccountEvents(id: string, events: AccountEvent[]): Result<Ac
         else if (event.type === 'StockBought') balance -= event.quantity * event.priceCents;   // positions live in the report, not here (until sell needs them)
         else return { ok: false, error: 'unknown event type' };
     }
-    return { ok: true, value: { balanceCents: balance, id: id } };
+    return { ok: true, value: { balanceCents: balance, id: first.id } };
 }
 
-export function collectDeposit(account: Account, amountCents: number, now: string, id: string): Result<DepositCollectedEvent> {
+// Business verbs: (aggregate, input, time) -> the events that happened. Usually one, sometimes more.
+
+export function collectDeposit(account: Account, amountCents: number, now: string): Result<AccountEvent[]> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
         return { ok: false, error: 'the deposit amount is incorrect' }
     else
-        return { ok: true, value: { id: id, type: 'DepositCollected', amountCents: amountCents, at: now } }
+        return { ok: true, value: [{ id: account.id, type: 'DepositCollected', amountCents: amountCents, at: now }] }
 }
 
-export function sendWithdrawal(account: Account, amountCents: number, now: string, id: string): Result<WithdrawalSentEvent> {
+export function sendWithdrawal(account: Account, amountCents: number, now: string): Result<AccountEvent[]> {
     if (!(Number.isSafeInteger(amountCents) && amountCents > 0))
         return { ok: false, error: 'the withdrawal amount is incorrect' }
     if (amountCents > account.balanceCents)
         return { ok: false, error: 'insufficient cash' }
     else
-        return { ok: true, value: { id: id, type: 'WithdrawalSent', amountCents: amountCents, at: now } }
+        return { ok: true, value: [{ id: account.id, type: 'WithdrawalSent', amountCents: amountCents, at: now }] }
 }
 
 export interface StockOrder {
@@ -79,7 +84,7 @@ export interface StockOrder {
     priceCents: number
 }
 
-export function buyStock(account: Account, order: StockOrder, now: string, id: string): Result<StockBoughtEvent> {
+export function buyStock(account: Account, order: StockOrder, now: string): Result<AccountEvent[]> {
     if (!isKnownStock(order.symbol))
         return { ok: false, error: `unknown symbol ${order.symbol}` }
     if (!(Number.isSafeInteger(order.quantity) && order.quantity > 0))
@@ -89,5 +94,5 @@ export function buyStock(account: Account, order: StockOrder, now: string, id: s
     if (order.quantity * order.priceCents > account.balanceCents)
         return { ok: false, error: 'insufficient cash' }
     else
-        return { ok: true, value: { id: id, type: 'StockBought', symbol: order.symbol, quantity: order.quantity, priceCents: order.priceCents, at: now } }
+        return { ok: true, value: [{ id: account.id, type: 'StockBought', symbol: order.symbol, quantity: order.quantity, priceCents: order.priceCents, at: now }] }
 }
