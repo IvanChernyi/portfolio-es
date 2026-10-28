@@ -12,21 +12,19 @@ export interface Deps {
 
 export const ACCOUNT_ID = 'main';   // the one stream this app has
 
-// What the user places: this many shares at whatever the market says. The
-// verb decides buy or sell; the order does not know.
+// what the user places. doesn't know if buy or sell
 export interface MarketOrder {
     symbol: string,
     quantity: number
 }
 
-// Attach the current price. The price source's failure passes through untouched.
 async function priceOrder(deps: Deps, order: MarketOrder): Promise<Result<StockOrder>> {
     const price = await deps.prices.latestPriceCents(order.symbol);
     if (!price.ok) return price;
     return { ok: true, value: { symbol: order.symbol, quantity: order.quantity, priceCents: price.value } };
 }
 
-// A stream nobody has written to yet is a new account with nothing in it.
+// an empty streamt is a new account with nothing in it.
 export function loadAccount(deps: Deps): Result<Account> {
     const events = deps.store.read(ACCOUNT_ID);
     if (events.length === 0) return { ok: true, value: { id: ACCOUNT_ID, balanceCents: 0, positions: [] } };
