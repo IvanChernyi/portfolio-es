@@ -59,5 +59,12 @@ export function createApp(deps: Deps, report: SqlPositionsReport): express.Expre
         res.json(STOCKS);
     });
 
+    app.get('/api/prices/:symbol', async (req, res) => {
+        const symbol = req.params.symbol.toUpperCase();
+        const price = await deps.prices.latestPriceCents(symbol);
+        if (!price.ok) return reply(res, price);
+        res.json({ symbol, priceCents: price.value });
+    });
+
     return app;
 }

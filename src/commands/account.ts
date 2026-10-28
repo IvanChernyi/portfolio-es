@@ -2,10 +2,12 @@
 
 import { Account, AccountEvent, buyStock, collectDeposit, foldAccountEvents, Result, sellStock, sendWithdrawal, StockOrder } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
+import { PriceSource } from '../domain/priceSource';
 
 export interface Deps {
     store: EventStore;
-    now: () => string;   // the clock lives in main; the command hands the time to the domain
+    prices: PriceSource;   // where prices come from; main decides which plug
+    now: () => string;     // the clock lives in main; the command hands the time to the domain
 }
 
 export const ACCOUNT_ID = 'main';   // the one stream this app has
