@@ -52,7 +52,6 @@
         <div class="row">
           <label>Stock<select name="symbol" id="symbol"></select></label>
           <label>Shares<input name="quantity" type="number" step="1" min="1" required placeholder="10"></label>
-          <label>Price per share ($)<input name="price" type="number" step="0.01" min="0.01" required placeholder="150.00"></label>
           <button type="submit" data-side="buy">Buy</button>
           <button type="submit" class="sell" data-side="sell">Sell</button>
         </div>
@@ -112,6 +111,17 @@
   async function loadStocks() {
     const stocks = await api('GET', '/api/stocks');
     $('symbol').innerHTML = stocks.map((s) => `<option value="${esc(s.symbol)}">${esc(s.symbol)} · ${esc(s.name)}</option>`).join('');
+    $('symbol').addEventListener('change', showPrice);
+    await showPrice();
+  }
+
+  // the price the market says right now, so the user sees what an order would cost
+  async function showPrice() {
+    const symbol = $('symbol').value;
+    try {
+      const q = await api('GET', '/api/prices/' + encodeURIComponent(symbol));
+      show('order-msg', `${q.symbol} is at ${fmt(q.priceCents)} per share`);
+    } catch (err) { show('order-msg', err.message, 'err'); }
   }
 
   let cashAction = 'deposits';
@@ -131,11 +141,13 @@
   $('order-form').addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const f = ev.target;
-    const order = { side, symbol: f.symbol.value, quantity: Number(f.quantity.value), priceCents: toCents(f.price.value) };
+    const order = { side, symbol: f.symbol.value, quantity: Number(f.quantity.value) };
     try {
       await api('POST', '/api/orders', order);
-      show('order-msg', `Stock ${side === 'sell' ? 'sold' : 'bought'}: ${order.quantity} × ${order.symbol} @ ${fmt(order.priceCents)}`, 'ok');
-      f.quantity.value = f.price.value = ''; await render();
+      f.quantity.value = ''; await render();
+      const events = await api('GET', '/api/events');
+      const last = events[events.length - 1];   // the fill price is on the event the command appended
+      show('order-msg', `Stock ${side === 'sell' ? 'sold' : 'bought'}: ${last.quantity} × ${last.symbol} @ ${fmt(last.priceCents)}`, 'ok');
     } catch (err) { show('order-msg', err.message, 'err'); }
   });
 

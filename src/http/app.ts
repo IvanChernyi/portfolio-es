@@ -9,12 +9,19 @@ import { SqlPositionsReport } from '../projections/positionsReport';
 
 // zod at the edge: request bodies come from outside the world
 const AmountBody = z.object({ amountCents: z.number().int().positive() });
-const OrderBody = z.object({ side: z.enum(['buy', 'sell']), symbol: z.string(), quantity: z.number().int().positive(), priceCents: z.number().int().positive() });
+const OrderBody = z.object({ side: z.enum(['buy', 'sell']), symbol: z.string(), quantity: z.number().int().positive() });
 
-// the one translator from a Result to an HTTP answer
-function reply(res: express.Response, result: Result<unknown>): void {
-    if (result.ok) res.status(200).json(result.value ?? {});
-    else res.status(400).json({ error: result.error });
+// the one translator from a Result to an HTTP answer. commands may be sync or async;
+// an unexpected throw (a bug, not a business failure) becomes a 500 here and nowhere else.
+async function reply(res: express.Response, work: Result<unknown> | Promise<Result<unknown>>): Promise<void> {
+    try {
+        const result = await work;
+        if (result.ok) res.status(200).json(result.value ?? {});
+        else res.status(400).json({ error: result.error });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'internal error' });
+    }
 }
 
 export function createApp(deps: Deps, report: SqlPositionsReport): express.Express {
@@ -36,8 +43,8 @@ export function createApp(deps: Deps, report: SqlPositionsReport): express.Expre
 
     app.post('/api/orders', (req, res) => {
         const body = OrderBody.safeParse(req.body);
-        if (!body.success) return reply(res, { ok: false, error: 'side, symbol, quantity and priceCents are required' });
-        const order = { symbol: body.data.symbol.toUpperCase(), quantity: body.data.quantity, priceCents: body.data.priceCents };
+        if (!body.success) return reply(res, { ok: false, error: 'side, symbol and quantity are required' });
+        const order = { symbol: body.data.symbol.toUpperCase(), quantity: body.data.quantity };
         reply(res, body.data.side === 'sell' ? sell(deps, order) : buy(deps, order));
     });
 

@@ -12,6 +12,20 @@ export interface Deps {
 
 export const ACCOUNT_ID = 'main';   // the one stream this app has
 
+// What the user places: this many shares at whatever the market says. The
+// verb decides buy or sell; the order does not know.
+export interface MarketOrder {
+    symbol: string,
+    quantity: number
+}
+
+// Attach the current price. The price source's failure passes through untouched.
+async function priceOrder(deps: Deps, order: MarketOrder): Promise<Result<StockOrder>> {
+    const price = await deps.prices.latestPriceCents(order.symbol);
+    if (!price.ok) return price;
+    return { ok: true, value: { symbol: order.symbol, quantity: order.quantity, priceCents: price.value } };
+}
+
 // A stream nobody has written to yet is a new account with nothing in it.
 export function loadAccount(deps: Deps): Result<Account> {
     const events = deps.store.read(ACCOUNT_ID);
@@ -44,20 +58,26 @@ export function withdraw(deps: Deps, amountCents: number): Result<void> {
     return appendAll(deps, sent.value, 'withdrawal');
 }
 
-export function buy(deps: Deps, order: StockOrder): Result<void> {
+export async function buy(deps: Deps, order: MarketOrder): Promise<Result<void>> {
+    const priced = await priceOrder(deps, order);
+    if (!priced.ok) return priced;
+
     const account = loadAccount(deps);
     if (!account.ok) return account;
 
-    const bought = buyStock(account.value, order, deps.now());
+    const bought = buyStock(account.value, priced.value, deps.now());
     if (!bought.ok) return bought;
     return appendAll(deps, bought.value, 'purchase');
 }
 
-export function sell(deps: Deps, order: StockOrder): Result<void> {
+export async function sell(deps: Deps, order: MarketOrder): Promise<Result<void>> {
+    const priced = await priceOrder(deps, order);
+    if (!priced.ok) return priced;
+
     const account = loadAccount(deps);
     if (!account.ok) return account;
 
-    const sold = sellStock(account.value, order, deps.now());
+    const sold = sellStock(account.value, priced.value, deps.now());
     if (!sold.ok) return sold;
     return appendAll(deps, sold.value, 'sale');
 }
