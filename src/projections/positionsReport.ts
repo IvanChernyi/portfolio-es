@@ -30,7 +30,6 @@ export function positionsFrom(events: AccountEvent[]): PositionReport[] {
     return Object.values(bySymbol);
 }
 
-// A question about state, answered by SQL over the report. No event, no verb.
 export interface PortfolioSummary {
     investedCents: number,       // cost basis of what is still held
     realizedPnlCents: number,    // every closed and partial sale, closed rows included
