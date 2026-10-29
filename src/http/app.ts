@@ -62,6 +62,13 @@ export function createApp(deps: Deps, report: SqlPositionsReport): express.Expre
         res.json(report.list());
     });
 
+    app.get('/api/summary', (_req, res) => {
+        const account = loadAccount(deps);
+        if (!account.ok) return reply(res, account);
+        report.rebuild(deps.store.read(ACCOUNT_ID));
+        res.json({ cashCents: account.value.balanceCents, ...report.summary() });
+    });
+
     app.get('/api/stocks', (_req, res) => {
         res.json(STOCKS);
     });

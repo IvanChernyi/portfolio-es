@@ -75,3 +75,20 @@ describe('positionsFrom with sells', () => {
         ]);
     });
 });
+
+describe('SqlPositionsReport.summary', () => {
+    it('sums cost basis over open rows, realized P&L over all rows, and counts open positions', () => {
+        const report = new SqlPositionsReport(new DatabaseSync(':memory:'));
+        report.rebuild([
+            ...events,
+            { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 4, priceCents: 20000 },   // closes AAPL at +20000
+        ]);
+        assert.deepEqual(report.summary(), { investedCents: 1 * 30_000, realizedPnlCents: 20_000, openPositions: 1 });
+    });
+
+    it('an empty report sums to zeros', () => {
+        const report = new SqlPositionsReport(new DatabaseSync(':memory:'));
+        report.rebuild([]);
+        assert.deepEqual(report.summary(), { investedCents: 0, realizedPnlCents: 0, openPositions: 0 });
+    });
+});

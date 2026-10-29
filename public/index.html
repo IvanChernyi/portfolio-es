@@ -61,6 +61,13 @@
   </div>
 
   <section class="card">
+    <h2>Portfolio summary</h2>
+    <div class="row" style="gap:28px;margin-bottom:16px">
+      <div class="stat"><div class="k">Cash</div><div class="v" id="sum-cash">–</div></div>
+      <div class="stat"><div class="k">Invested (cost basis)</div><div class="v" id="sum-invested">–</div></div>
+      <div class="stat"><div class="k">Total realized P&amp;L</div><div class="v" id="sum-realized">–</div></div>
+      <div class="stat"><div class="k">Open positions</div><div class="v" id="sum-open">–</div></div>
+    </div>
     <h2>Positions report</h2>
     <div class="tablewrap">
       <table><thead><tr><th>Symbol</th><th class="num">Shares</th><th class="num">Avg cost</th><th class="num">Cost basis</th><th class="num">Realized P&amp;L</th></tr></thead><tbody id="positions"></tbody></table>
@@ -93,8 +100,12 @@
   function show(id, text, kind) { const el = $(id); el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); }
 
   async function render() {
-    const [account, positions, events] = await Promise.all([api('GET', '/api/account'), api('GET', '/api/positions'), api('GET', '/api/events')]);
+    const [account, positions, events, summary] = await Promise.all([api('GET', '/api/account'), api('GET', '/api/positions'), api('GET', '/api/events'), api('GET', '/api/summary')]);
     $('balance').textContent = fmt(account.balanceCents);
+    $('sum-cash').textContent = fmt(summary.cashCents);
+    $('sum-invested').textContent = fmt(summary.investedCents);
+    $('sum-realized').innerHTML = `<span class="${summary.realizedPnlCents > 0 ? 'pos' : summary.realizedPnlCents < 0 ? 'neg' : ''}">${signed(summary.realizedPnlCents)}</span>`;
+    $('sum-open').textContent = summary.openPositions;
 
     const ptb = $('positions'); ptb.innerHTML = ''; $('positions-empty').hidden = positions.length > 0;
     for (const p of positions) ptb.insertAdjacentHTML('beforeend',

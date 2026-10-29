@@ -30,6 +30,13 @@ export function positionsFrom(events: AccountEvent[]): PositionReport[] {
     return Object.values(bySymbol);
 }
 
+// A question about state, answered by SQL over the report. No event, no verb.
+export interface PortfolioSummary {
+    investedCents: number,       // cost basis of what is still held
+    realizedPnlCents: number,    // every closed and partial sale, closed rows included
+    openPositions: number
+}
+
 interface PositionRow {
     symbol: string,
     quantity: number,
@@ -59,5 +66,15 @@ export class SqlPositionsReport {
     list(): PositionReport[] {
         const rows = this.db.prepare(`SELECT symbol, quantity, avg_cost_cents, realized_pnl_cents FROM positions_report ORDER BY symbol`).all() as unknown as PositionRow[];
         return rows.map((r) => ({ symbol: r.symbol, quantity: r.quantity, avgCostCents: r.avg_cost_cents, realizedPnlCents: r.realized_pnl_cents }));
+    }
+
+    summary(): PortfolioSummary {
+        const row = this.db.prepare(`
+            SELECT COALESCE(SUM(quantity * avg_cost_cents), 0) AS invested_cents,
+                   COALESCE(SUM(realized_pnl_cents), 0)      AS realized_pnl_cents,
+                   COALESCE(SUM(quantity > 0), 0)            AS open_positions
+            FROM positions_report
+        `).get() as unknown as { invested_cents: number, realized_pnl_cents: number, open_positions: number };
+        return { investedCents: row.invested_cents, realizedPnlCents: row.realized_pnl_cents, openPositions: row.open_positions };
     }
 }
