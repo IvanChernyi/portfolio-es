@@ -1,6 +1,6 @@
 // commands (app layer): read - fold - business verb - append. feeds the deps, no tech concerns.
 
-import { Account, AccountEvent, buyStock, collectDeposit, foldAccountEvents, Result, sellStock, sendWithdrawal, StockOrder } from '../domain/account';
+import { Account, AccountEvent, buyStock, collectDeposit, foldAccountEvents, Result, reverseDeposit as reverseDepositVerb, reverseWithdrawal as reverseWithdrawalVerb, sellStock, sendWithdrawal, StockOrder } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
 import { PriceSource } from '../domain/priceSource';
 
@@ -27,7 +27,7 @@ async function priceOrder(deps: Deps, order: MarketOrder): Promise<Result<StockO
 // an empty streamt is a new account with nothing in it.
 export function loadAccount(deps: Deps): Result<Account> {
     const events = deps.store.read(ACCOUNT_ID);
-    if (events.length === 0) return { ok: true, value: { id: ACCOUNT_ID, balanceCents: 0, positions: [] } };
+    if (events.length === 0) return { ok: true, value: { id: ACCOUNT_ID, balanceCents: 0, positions: [], reversedSeqs: [] } };
     return foldAccountEvents(events);
 }
 
@@ -78,4 +78,32 @@ export async function sell(deps: Deps, order: MarketOrder): Promise<Result<void>
     const sold = sellStock(account.value, priced.value, deps.now());
     if (!sold.ok) return sold;
     return appendAll(deps, sold.value, 'sale');
+}
+
+// Reversals: find the original by its position (a lookup, not a rule), fold, let the verb decide.
+
+export function reverseDeposit(deps: Deps, seq: number): Result<void> {
+    const events = deps.store.read(ACCOUNT_ID);
+    const original = events.find((e) => e.seq === seq);
+    if (!original || original.type !== 'DepositCollected') return { ok: false, error: `no deposit at position ${seq}` };
+
+    const account = foldAccountEvents(events);
+    if (!account.ok) return account;
+
+    const reversed = reverseDepositVerb(account.value, original, deps.now());
+    if (!reversed.ok) return reversed;
+    return appendAll(deps, reversed.value, 'reversal');
+}
+
+export function reverseWithdrawal(deps: Deps, seq: number): Result<void> {
+    const events = deps.store.read(ACCOUNT_ID);
+    const original = events.find((e) => e.seq === seq);
+    if (!original || original.type !== 'WithdrawalSent') return { ok: false, error: `no withdrawal at position ${seq}` };
+
+    const account = foldAccountEvents(events);
+    if (!account.ok) return account;
+
+    const reversed = reverseWithdrawalVerb(account.value, original, deps.now());
+    if (!reversed.ok) return reversed;
+    return appendAll(deps, reversed.value, 'reversal');
 }

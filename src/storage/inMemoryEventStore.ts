@@ -1,7 +1,7 @@
 // storage: a second plug for the EventStore socket, over an array. Same contract, no database.
 // For command tests; not a mock, a real implementation that happens to forget on exit.
 
-import { AccountEvent } from '../domain/account';
+import { AccountEvent, Stored } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
 
 export class InMemoryEventStore implements EventStore {
@@ -14,7 +14,7 @@ export class InMemoryEventStore implements EventStore {
         return true;
     }
 
-    read(stream: string): AccountEvent[] {
-        return [...(this.streams.get(stream) ?? [])];   // a copy, so callers cannot mutate storage
+    read(stream: string): Stored<AccountEvent>[] {
+        return (this.streams.get(stream) ?? []).map((event, i) => ({ ...event, seq: i + 1 }));   // copies, with their position
     }
 }

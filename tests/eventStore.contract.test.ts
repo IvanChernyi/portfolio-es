@@ -28,7 +28,14 @@ for (const [name, make] of implementations) {
             const store = make();
             assert.equal(store.append('main', deposit), true);
             assert.equal(store.append('main', buy), true);
-            assert.deepEqual(store.read('main'), [deposit, buy]);
+            assert.deepEqual(store.read('main'), [{ ...deposit, seq: 1 }, { ...buy, seq: 2 }]);
+        });
+
+        it('seq counts from 1 per stream', () => {
+            const store = make();
+            store.append('main', deposit);
+            store.append('other', buy);
+            assert.deepEqual(store.read('other').map((e) => e.seq), [1]);
         });
 
         it('the same account id on every event is allowed', () => {
@@ -42,8 +49,8 @@ for (const [name, make] of implementations) {
             const store = make();
             store.append('main', deposit);
             store.append('other', buy);
-            assert.deepEqual(store.read('main'), [deposit]);
-            assert.deepEqual(store.read('other'), [buy]);
+            assert.deepEqual(store.read('main'), [{ ...deposit, seq: 1 }]);
+            assert.deepEqual(store.read('other'), [{ ...buy, seq: 1 }]);
         });
 
         it('what the caller mutates after reading does not reach storage', () => {

@@ -27,6 +27,8 @@
   .empty { color:var(--muted); padding:12px 6px; } .tablewrap { overflow-x:auto; } [hidden]{ display:none !important; }
   .pos { color:#059669; } .neg { color:#dc2626; } tr.closed td { color:var(--muted); }
   button.sell { background:#dc2626; border-color:#dc2626; }
+  button.small { padding:3px 8px; font-size:12px; }
+  tr.reversed td { color:var(--muted); text-decoration:line-through; } tr.reversed td.actions { text-decoration:none; }
 </style>
 </head>
 <body>
@@ -78,7 +80,7 @@
   <section class="card">
     <h2>Event stream "main"</h2>
     <div class="tablewrap">
-      <table><thead><tr><th>#</th><th>At</th><th>Event</th><th>Detail</th></tr></thead><tbody id="events"></tbody></table>
+      <table><thead><tr><th>#</th><th>At</th><th>Event</th><th>Detail</th><th></th></tr></thead><tbody id="events"></tbody></table>
       <div class="empty" id="events-empty" hidden>No events yet. Make a deposit.</div>
     </div>
   </section>
@@ -112,11 +114,22 @@
       `<tr class="${p.quantity === 0 ? 'closed' : ''}"><td>${esc(p.symbol)}${p.quantity === 0 ? ' (closed)' : ''}</td><td class="num">${p.quantity}</td><td class="num">${fmt(p.avgCostCents)}</td><td class="num">${fmt(p.quantity * p.avgCostCents)}</td><td class="num ${p.realizedPnlCents > 0 ? 'pos' : p.realizedPnlCents < 0 ? 'neg' : ''}">${signed(p.realizedPnlCents)}</td></tr>`);
 
     const etb = $('events'); etb.innerHTML = ''; $('events-empty').hidden = events.length > 0;
-    events.forEach((e, i) => {
-      const detail = e.type === 'StockBought' || e.type === 'StockSold' ? `${e.quantity} × ${esc(e.symbol)} @ ${fmt(e.priceCents)}` : fmt(e.amountCents);
+    const reversedBy = new Map(events.filter((e) => e.correctsSeq).map((e) => [e.correctsSeq, e.seq]));
+    for (const e of events) {
+      const detail = e.type === 'StockBought' || e.type === 'StockSold' ? `${e.quantity} × ${esc(e.symbol)} @ ${fmt(e.priceCents)}`
+                   : e.correctsSeq ? `reverses #${e.correctsSeq} · ${fmt(e.amountCents)}`
+                   : fmt(e.amountCents);
+      const reversible = (e.type === 'DepositCollected' || e.type === 'WithdrawalSent') && !reversedBy.has(e.seq);
+      const action = reversible ? `<button class="ghost small" data-seq="${e.seq}" data-kind="${e.type === 'DepositCollected' ? 'deposits' : 'withdrawals'}">Reverse</button>`
+                   : reversedBy.has(e.seq) ? `<span class="age">reversed by #${reversedBy.get(e.seq)}</span>` : '';
       etb.insertAdjacentHTML('afterbegin',
-        `<tr><td class="mono">${i + 1}</td><td class="mono">${esc(e.at.slice(0, 19).replace('T', ' '))}</td><td>${esc(e.type)}</td><td>${detail}</td></tr>`);
-    });
+        `<tr class="${reversedBy.has(e.seq) ? 'reversed' : ''}"><td class="mono">${e.seq}</td><td class="mono">${esc(e.at.slice(0, 19).replace('T', ' '))}</td><td>${esc(e.type)}</td><td>${detail}</td><td class="actions">${action}</td></tr>`);
+    }
+    etb.querySelectorAll('button[data-seq]').forEach((b) => b.addEventListener('click', async () => {
+      if (!confirm(`Reverse event #${b.dataset.seq}? The original stays in the stream; a reversal is appended.`)) return;
+      try { await api('POST', `/api/${b.dataset.kind}/${b.dataset.seq}/reverse`); await render(); }
+      catch (err) { show('cash-msg', err.message, 'err'); }
+    }));
   }
 
   async function loadStocks() {

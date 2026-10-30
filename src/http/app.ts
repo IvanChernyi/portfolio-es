@@ -2,7 +2,7 @@
 
 import express from 'express';
 import { z } from 'zod';
-import { ACCOUNT_ID, buy, Deps, deposit, loadAccount, sell, withdraw } from '../commands/account';
+import { ACCOUNT_ID, buy, Deps, deposit, loadAccount, reverseDeposit, reverseWithdrawal, sell, withdraw } from '../commands/account';
 import { Result } from '../domain/account';
 import { STOCKS } from '../domain/instruments';
 import { SqlPositionsReport } from '../projections/positionsReport';
@@ -10,6 +10,7 @@ import { SqlPositionsReport } from '../projections/positionsReport';
 // zod at the edge: request bodies come from outside the world
 const AmountBody = z.object({ amountCents: z.number().int().positive() });
 const OrderBody = z.object({ side: z.enum(['buy', 'sell']), symbol: z.string(), quantity: z.number().int().positive() });
+const SeqParam = z.coerce.number().int().positive();   // '7' in the URL -> 7
 
 // the one translator from a Result to an HTTP answer. commands may be sync or async;
 // an unexpected throw (a bug, not a business failure) becomes a 500 here and nowhere else.
@@ -39,6 +40,18 @@ export function createApp(deps: Deps, report: SqlPositionsReport): express.Expre
         const body = AmountBody.safeParse(req.body);
         if (!body.success) return reply(res, { ok: false, error: 'amountCents must be a positive whole number' });
         reply(res, withdraw(deps, body.data.amountCents));
+    });
+
+    app.post('/api/deposits/:seq/reverse', (req, res) => {
+        const seq = SeqParam.safeParse(req.params.seq);
+        if (!seq.success) return reply(res, { ok: false, error: 'seq must be a positive whole number' });
+        reply(res, reverseDeposit(deps, seq.data));
+    });
+
+    app.post('/api/withdrawals/:seq/reverse', (req, res) => {
+        const seq = SeqParam.safeParse(req.params.seq);
+        if (!seq.success) return reply(res, { ok: false, error: 'seq must be a positive whole number' });
+        reply(res, reverseWithdrawal(deps, seq.data));
     });
 
     app.post('/api/orders', (req, res) => {

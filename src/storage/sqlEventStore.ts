@@ -1,10 +1,11 @@
 // storage, impure
 
 import { DatabaseSync } from 'node:sqlite';
-import { AccountEvent, AccountEventSchema } from '../domain/account';
+import { AccountEvent, AccountEventSchema, Stored } from '../domain/account';
 import { EventStore } from '../domain/eventStore';
 
 interface EventRow {
+    seq: number;
     payload: string;
 }
 
@@ -36,8 +37,8 @@ export class SqlEventStore implements EventStore {
         }
     }
 
-    read(stream: string): AccountEvent[] {
-        const rows = this.db.prepare(`SELECT payload FROM events WHERE stream = ? ORDER BY seq`).all(stream) as unknown as EventRow[];
-        return rows.map((row) => AccountEventSchema.parse(JSON.parse(row.payload)));
+    read(stream: string): Stored<AccountEvent>[] {
+        const rows = this.db.prepare(`SELECT seq, payload FROM events WHERE stream = ? ORDER BY seq`).all(stream) as unknown as EventRow[];
+        return rows.map((row) => ({ ...AccountEventSchema.parse(JSON.parse(row.payload)), seq: row.seq }));
     }
 }

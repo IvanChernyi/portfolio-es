@@ -2,12 +2,15 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { Account, AccountEvent, collectDeposit, foldAccountEvents, sellStock, sendWithdrawal } from '../src/domain/account';
+import { Account, AccountEvent, collectDeposit, foldAccountEvents, reverseDeposit, reverseWithdrawal, sellStock, sendWithdrawal, Stored } from '../src/domain/account';
+
+// hand-written events get their position the way the store would give it
+const stored = (events: AccountEvent[]): Stored<AccountEvent>[] => events.map((e, i) => ({ ...e, seq: i + 1 }));
 
 const at = '2026-10-19T10:00:00.000Z';
 
-const empty: Account = { id: 'main', balanceCents: 0, positions: [] };
-const funded: Account = { id: 'main', balanceCents: 50000, positions: [] };
+const empty: Account = { id: 'main', balanceCents: 0, positions: [], reversedSeqs: [] };
+const funded: Account = { id: 'main', balanceCents: 50000, positions: [], reversedSeqs: [] };
 
 describe('collectDeposit', () => {
     it('returns a DepositCollected event stamped with the account and the time', () => {
@@ -62,7 +65,7 @@ describe('foldAccountEvents', () => {
             { id: 'main', at, type: 'DepositCollected', amountCents: 20000 },
             { id: 'main', at, type: 'WithdrawalSent', amountCents: 3000 },
         ];
-        assert.deepEqual(foldAccountEvents(events), { ok: true, value: { id: 'main', balanceCents: 17000, positions: [] } });
+        assert.deepEqual(foldAccountEvents(stored(events)), { ok: true, value: { id: 'main', balanceCents: 17000, positions: [], reversedSeqs: [] } });
     });
 
     it('cannot build an account from no events', () => {
@@ -85,7 +88,7 @@ describe('foldAccountEvents', () => {
             assert.equal(produced.ok, true);
             if (!produced.ok) return;
             events = [...events, ...produced.value];
-            const folded = foldAccountEvents(events);
+            const folded = foldAccountEvents(stored(events));
             assert.equal(folded.ok, true);
             if (!folded.ok) return;
             account = folded.value;
@@ -97,7 +100,7 @@ describe('foldAccountEvents', () => {
 });
 
 describe('sellStock', () => {
-    const holding: Account = { id: 'main', balanceCents: 0, positions: [{ symbol: 'AAPL', quantity: 3, avgCostCents: 10000 }] };
+    const holding: Account = { id: 'main', balanceCents: 0, positions: [{ symbol: 'AAPL', quantity: 3, avgCostCents: 10000 }], reversedSeqs: [] };
 
     it('returns a StockSold event when enough shares are held', () => {
         const result = sellStock(holding, { symbol: 'AAPL', quantity: 2, priceCents: 12000 }, at);
@@ -124,9 +127,9 @@ describe('foldAccountEvents with trades', () => {
             { id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 4, priceCents: 10000 },
             { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 1, priceCents: 15000 },
         ];
-        assert.deepEqual(foldAccountEvents(events), {
+        assert.deepEqual(foldAccountEvents(stored(events)), {
             ok: true,
-            value: { id: 'main', balanceCents: 100000 - 40000 + 15000, positions: [{ symbol: 'AAPL', quantity: 3, avgCostCents: 10000 }] },
+            value: { id: 'main', balanceCents: 100000 - 40000 + 15000, positions: [{ symbol: 'AAPL', quantity: 3, avgCostCents: 10000 }], reversedSeqs: [] },
         });
     });
 
@@ -136,8 +139,45 @@ describe('foldAccountEvents with trades', () => {
             { id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
             { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
         ];
-        const folded = foldAccountEvents(events);
+        const folded = foldAccountEvents(stored(events));
         assert.deepEqual(folded.ok && folded.value.positions, []);
+    });
+});
+
+describe('reversals', () => {
+    const deposit: Stored<AccountEvent> = { seq: 1, id: 'main', at, type: 'DepositCollected', amountCents: 20000 };
+    const withdrawal: Stored<AccountEvent> = { seq: 2, id: 'main', at, type: 'WithdrawalSent', amountCents: 5000 };
+
+    it('reverseDeposit points at the original and copies its amount', () => {
+        if (deposit.type !== 'DepositCollected') return assert.fail('fixture');
+        assert.deepEqual(reverseDeposit(funded, deposit, at), {
+            ok: true,
+            value: [{ id: 'main', type: 'DepositReversed', correctsSeq: 1, amountCents: 20000, at }],
+        });
+    });
+
+    it('a deposit can be reversed once', () => {
+        if (deposit.type !== 'DepositCollected') return assert.fail('fixture');
+        const alreadyReversed: Account = { ...funded, reversedSeqs: [1] };
+        assert.deepEqual(reverseDeposit(alreadyReversed, deposit, at), { ok: false, error: 'deposit #1 was already reversed' });
+    });
+
+    it('the fold nets an event against its reversal and remembers the position', () => {
+        const events: Stored<AccountEvent>[] = [
+            deposit,
+            withdrawal,
+            { seq: 3, id: 'main', at, type: 'DepositReversed', correctsSeq: 1, amountCents: 20000 },
+            { seq: 4, id: 'main', at, type: 'WithdrawalReversed', correctsSeq: 2, amountCents: 5000 },
+        ];
+        assert.deepEqual(foldAccountEvents(events), { ok: true, value: { id: 'main', balanceCents: 0, positions: [], reversedSeqs: [1, 2] } });
+    });
+
+    it('reversing a deposit after the money was spent leaves a negative balance: the fact is the fact', () => {
+        if (withdrawal.type !== 'WithdrawalSent') return assert.fail('fixture');
+        const spent: Account = { id: 'main', balanceCents: 0, positions: [], reversedSeqs: [] };
+        if (deposit.type !== 'DepositCollected') return assert.fail('fixture');
+        assert.equal(reverseDeposit(spent, deposit, at).ok, true);
+        assert.equal(reverseWithdrawal(spent, withdrawal, at).ok, true);
     });
 });
 

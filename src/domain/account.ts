@@ -36,19 +36,41 @@ export const StockSoldSchema = AccountEventBase.extend({
     priceCents: z.number().int().positive(),
 });
 
+// Compensating events: a wrong event stays; a new event says it did not count.
+// correctsSeq points at the position of the original in the stream.
+export const DepositReversedSchema = AccountEventBase.extend({
+    type: z.literal('DepositReversed'),
+    correctsSeq: z.number().int().positive(),
+    amountCents: z.number().int().positive(),   // copied from the original so a reader needs no lookup
+});
+
+export const WithdrawalReversedSchema = AccountEventBase.extend({
+    type: z.literal('WithdrawalReversed'),
+    correctsSeq: z.number().int().positive(),
+    amountCents: z.number().int().positive(),
+});
+
 // JSON from disk goes through this before the domain is allowed to see it
 export const AccountEventSchema = z.discriminatedUnion('type', [
     DepositCollectedSchema,
     WithdrawalSentSchema,
     StockBoughtSchema,
-    StockSoldSchema
+    StockSoldSchema,
+    DepositReversedSchema,
+    WithdrawalReversedSchema
 ]);
 
 export type DepositCollectedEvent = z.infer<typeof DepositCollectedSchema>;
 export type WithdrawalSentEvent = z.infer<typeof WithdrawalSentSchema>;
 export type StockBoughtEvent = z.infer<typeof StockBoughtSchema>;
 export type StockSoldEvent = z.infer<typeof StockSoldSchema>;
+export type DepositReversedEvent = z.infer<typeof DepositReversedSchema>;
+export type WithdrawalReversedEvent = z.infer<typeof WithdrawalReversedSchema>;
 export type AccountEvent = z.infer<typeof AccountEventSchema>;
+
+// What comes out of the store: the event plus its position in the stream.
+// seq is the store's row number, not a minted identity; a verb never sets it.
+export type Stored<E> = E & { seq: number };
 
 // What the account holds of one stock. Part of the aggregate because
 // "cannot sell what you do not hold" needs it.
@@ -61,18 +83,22 @@ export interface Position {
 export interface Account {
     id: string,
     balanceCents: number,
-    positions: Position[]
+    positions: Position[],
+    reversedSeqs: number[]   // which events have been compensated; a reversal happens once
 } // aggregate
 
 // left fold: events in, aggregate out. the id comes from the events themselves
-export function foldAccountEvents(events: AccountEvent[]): Result<Account> {
+export function foldAccountEvents(events: Stored<AccountEvent>[]): Result<Account> {
     const first = events[0];
     if (!first) return { ok: false, error: 'no events' };
     let balance = 0;
     const held: Record<string, Position> = {};
+    const reversedSeqs: number[] = [];
     for (const event of events) {
         if (event.type === 'DepositCollected') balance += event.amountCents;
         else if (event.type === 'WithdrawalSent') balance -= event.amountCents;
+        else if (event.type === 'DepositReversed') { balance -= event.amountCents; reversedSeqs.push(event.correctsSeq); }
+        else if (event.type === 'WithdrawalReversed') { balance += event.amountCents; reversedSeqs.push(event.correctsSeq); }
         else if (event.type === 'StockBought') {
             balance -= event.quantity * event.priceCents;
             const p = held[event.symbol] ?? { symbol: event.symbol, quantity: 0, avgCostCents: 0 };
@@ -88,7 +114,7 @@ export function foldAccountEvents(events: AccountEvent[]): Result<Account> {
         else return { ok: false, error: 'unknown event type' };
     }
     const positions = Object.values(held).filter((p) => p.quantity > 0);
-    return { ok: true, value: { id: first.id, balanceCents: balance, positions } };
+    return { ok: true, value: { id: first.id, balanceCents: balance, positions, reversedSeqs } };
 }
 
 // business verbs: (aggregate, input, time) -> the events that happened
@@ -140,4 +166,22 @@ export function sellStock(account: Account, order: StockOrder, now: string): Res
         return { ok: false, error: `not enough ${order.symbol} shares to sell` }
     else
         return { ok: true, value: [{ id: account.id, type: 'StockSold', symbol: order.symbol, quantity: order.quantity, priceCents: order.priceCents, at: now }] }
+}
+
+// Reversals: the original event is the business input, the way an order is for a buy.
+// The parameter type makes "reverse a deposit that is really a withdrawal" impossible to write.
+// A reversed deposit may push the balance below zero: the fact is the fact.
+
+export function reverseDeposit(account: Account, original: Stored<DepositCollectedEvent>, now: string): Result<AccountEvent[]> {
+    if (account.reversedSeqs.includes(original.seq))
+        return { ok: false, error: `deposit #${original.seq} was already reversed` }
+    else
+        return { ok: true, value: [{ id: account.id, type: 'DepositReversed', correctsSeq: original.seq, amountCents: original.amountCents, at: now }] }
+}
+
+export function reverseWithdrawal(account: Account, original: Stored<WithdrawalSentEvent>, now: string): Result<AccountEvent[]> {
+    if (account.reversedSeqs.includes(original.seq))
+        return { ok: false, error: `withdrawal #${original.seq} was already reversed` }
+    else
+        return { ok: true, value: [{ id: account.id, type: 'WithdrawalReversed', correctsSeq: original.seq, amountCents: original.amountCents, at: now }] }
 }

@@ -4,17 +4,17 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
-import { AccountEvent, buyStock, foldAccountEvents } from '../src/domain/account';
+import { AccountEvent, buyStock, foldAccountEvents, Stored } from '../src/domain/account';
 import { positionsFrom, SqlPositionsReport } from '../src/projections/positionsReport';
 import { SqlEventStore } from '../src/storage/sqlEventStore';
 
 const at = '2026-10-18T10:00:00.000Z';
 
-const events: AccountEvent[] = [
-    { id: 'main', at, type: 'DepositCollected', amountCents: 100_000 },
-    { id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
-    { id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 20000 },
-    { id: 'main', at, type: 'StockBought', symbol: 'MSFT', quantity: 1, priceCents: 30000 },
+const events: Stored<AccountEvent>[] = [
+    { seq: 1, id: 'main', at, type: 'DepositCollected', amountCents: 100_000 },
+    { seq: 2, id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 10000 },
+    { seq: 3, id: 'main', at, type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 20000 },
+    { seq: 4, id: 'main', at, type: 'StockBought', symbol: 'MSFT', quantity: 1, priceCents: 30000 },
 ];
 
 describe('positionsFrom', () => {
@@ -39,7 +39,7 @@ describe('fold with StockBought', () => {
 });
 
 describe('buyStock', () => {
-    const account = { id: 'main', balanceCents: 50_000, positions: [] };
+    const account = { id: 'main', balanceCents: 50_000, positions: [], reversedSeqs: [] };
     it('returns a StockBought event when the symbol is known and cash suffices', () => {
         const result = buyStock(account, { symbol: 'AAPL', quantity: 2, priceCents: 20_000 }, at);
         assert.deepEqual(result, { ok: true, value: [{ id: 'main', type: 'StockBought', symbol: 'AAPL', quantity: 2, priceCents: 20_000, at }] });
@@ -68,7 +68,7 @@ describe('positionsFrom with sells', () => {
         const sold: AccountEvent[] = [
             ...events,
             { id: 'main', at, type: 'StockSold', symbol: 'AAPL', quantity: 4, priceCents: 20000 },
-        ];
+        ];   // positionsFrom takes plain events; a Stored event is also a plain event
         assert.deepEqual(positionsFrom(sold), [
             { symbol: 'AAPL', quantity: 0, avgCostCents: 15_000, realizedPnlCents: (20000 - 15000) * 4 },
             { symbol: 'MSFT', quantity: 1, avgCostCents: 30_000, realizedPnlCents: 0 },
