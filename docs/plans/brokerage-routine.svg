@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 1062" width="1460" height="1062" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="13">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arrow-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ca3af" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1460" height="1062" fill="#ffffff"/>
+<text x="730" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#1c1e21">My brokerage routine: three records, and the broker's truth</text>
+<text x="730" y="56" text-anchor="middle" font-size="13" fill="#6b7280">a two-week loop: gather, decide, act · I decide the three records · the brokerage account is outside and is the source of truth · numbers give the order</text>
+<text x="730" y="76" text-anchor="middle" font-size="12" fill="#6b7280">yellow: people · pale: my records (aggregates) · green: a view · pink: outside, not mine · small teal cards: my three real contingencies and how the design answers them</text>
+<rect x="20" y="760" width="1420" height="282" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+<rect x="20" y="100" width="460" height="640" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" data-zone="1"/>
+<text x="36" y="124" font-size="14" font-weight="700" fill="#1c1e21">1  Gather</text>
+<text x="36" y="141" font-size="11.5" fill="#64748b">Claude Code prepares the report</text>
+<rect x="500" y="100" width="460" height="640" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" data-zone="1"/>
+<text x="516" y="124" font-size="14" font-weight="700" fill="#1c1e21">2  Decide</text>
+<text x="516" y="141" font-size="11.5" fill="#64748b">I read it and choose what to do</text>
+<rect x="980" y="100" width="460" height="640" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" data-zone="1"/>
+<text x="996" y="124" font-size="14" font-weight="700" fill="#1c1e21">3  Act</text>
+<text x="996" y="141" font-size="11.5" fill="#64748b">I move money and place orders; the broker answers</text>
+<rect x="150" y="150" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4"/>
+<text x="235" y="180.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Claude Code</text>
+<text x="235" y="199.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: a reliable report</text>
+<text x="235" y="214.25" text-anchor="middle" font-size="11.5" fill="#44403c">every two weeks</text>
+<rect x="35" y="300" width="190" height="70" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
+<text x="130" y="329.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1e21">Market data and news</text>
+<text x="130" y="348.4" text-anchor="middle" font-size="11.5" fill="#44403c">price, P/E, company news</text>
+<rect x="265" y="290" width="210" height="170" rx="10" fill="#fef9c3"/>
+<path d="M275,290 L465,290 Q475,290 475,300 L475,312 L265,312 L265,300 Q265,290 275,290 Z" fill="#fde68a"/>
+<line x1="265" y1="312" x2="475" y2="312" stroke="#a16207" stroke-width="1"/>
+<rect x="265" y="290" width="210" height="170" rx="10" fill="none" stroke="#a16207" stroke-width="2.2"/>
+<text x="370" y="305" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing="1.2" fill="#92400e">ONE LIST</text>
+<text x="370" y="333" text-anchor="middle" font-size="16" font-weight="700" fill="#1c1e21">Watchlist</text>
+<text x="370" y="350" text-anchor="middle" font-size="11" fill="#44403c">decided by me</text>
+<text x="370" y="371" text-anchor="middle" font-size="10.5" fill="#1c1e21">added: owned or considered</text>
+<text x="370" y="386" text-anchor="middle" font-size="10.5" fill="#1c1e21">why: its moat, in a sentence</text>
+<text x="370" y="401" text-anchor="middle" font-size="10.5" fill="#1c1e21">company removed</text>
+<text x="370" y="449" text-anchor="middle" font-size="10.5" font-style="italic" fill="#7e22ce">rule: I buy only from this list</text>
+<rect x="135" y="520" width="220" height="86" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.4"/>
+<text x="245" y="550.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Report</text>
+<text x="245" y="569.25" text-anchor="middle" font-size="11.5" fill="#44403c">every two weeks: valuations,</text>
+<text x="245" y="584.25" text-anchor="middle" font-size="11.5" fill="#44403c">moats, news, my balance</text>
+<rect x="645" y="150" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4"/>
+<text x="730" y="180.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Me, the investor</text>
+<text x="730" y="199.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: invest each paycheck</text>
+<text x="730" y="214.25" text-anchor="middle" font-size="11.5" fill="#44403c">well, on reliable facts</text>
+<rect x="620" y="300" width="220" height="186" rx="10" fill="#fef9c3"/>
+<path d="M630,300 L830,300 Q840,300 840,310 L840,322 L620,322 L620,310 Q620,300 630,300 Z" fill="#fde68a"/>
+<line x1="620" y1="322" x2="840" y2="322" stroke="#a16207" stroke-width="1"/>
+<rect x="620" y="300" width="220" height="186" rx="10" fill="none" stroke="#a16207" stroke-width="2.2"/>
+<text x="730" y="315" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing="1.2" fill="#92400e">ONE PER TWO WEEKS</text>
+<text x="730" y="343" text-anchor="middle" font-size="16" font-weight="700" fill="#1c1e21">Review</text>
+<text x="730" y="360" text-anchor="middle" font-size="11" fill="#44403c">decided by me</text>
+<text x="730" y="381" text-anchor="middle" font-size="10.5" fill="#1c1e21">report read, as of its date</text>
+<text x="730" y="396" text-anchor="middle" font-size="10.5" fill="#1c1e21">differences explained</text>
+<text x="730" y="411" text-anchor="middle" font-size="10.5" fill="#1c1e21">budget: the next paycheck</text>
+<text x="730" y="426" text-anchor="middle" font-size="10.5" fill="#1c1e21">buy, sell or hold, per company</text>
+<text x="730" y="441" text-anchor="middle" font-size="10.5" fill="#1c1e21">closed</text>
+<text x="730" y="475" text-anchor="middle" font-size="10.5" font-style="italic" fill="#7e22ce">rule: a closed review never changes</text>
+<rect x="630" y="500" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+<circle cx="645" cy="515" r="9" fill="#0d9488"/>
+<text x="645" y="518.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">3</text>
+<text x="660" y="519" font-size="11" font-weight="700" fill="#1c1e21">Report differs from broker</text>
+<text x="642" y="535" font-size="10" fill="#374151">the broker wins; every</text>
+<text x="642" y="547" font-size="10" fill="#374151">difference gets a reason first</text>
+<polyline points="730,486 730,500" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
+<rect x="1240" y="150" width="195" height="66" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
+<text x="1337.5" y="177.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1e21">Paycheck</text>
+<text x="1337.5" y="196.4" text-anchor="middle" font-size="11.5" fill="#44403c">from my employer</text>
+<rect x="990" y="300" width="200" height="186" rx="10" fill="#fef9c3"/>
+<path d="M1000,300 L1180,300 Q1190,300 1190,310 L1190,322 L990,322 L990,310 Q990,300 1000,300 Z" fill="#fde68a"/>
+<line x1="990" y1="322" x2="1190" y2="322" stroke="#a16207" stroke-width="1"/>
+<rect x="990" y="300" width="200" height="186" rx="10" fill="none" stroke="#a16207" stroke-width="2.2"/>
+<text x="1090" y="315" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing="1.2" fill="#92400e">ONE PER ORDER</text>
+<text x="1090" y="343" text-anchor="middle" font-size="16" font-weight="700" fill="#1c1e21">Order</text>
+<text x="1090" y="360" text-anchor="middle" font-size="11" fill="#44403c">placed by me</text>
+<text x="1090" y="381" text-anchor="middle" font-size="10.5" fill="#1c1e21">placed: stock, quantity, limit</text>
+<text x="1090" y="396" text-anchor="middle" font-size="10.5" fill="#1c1e21">the price I saw, copied</text>
+<text x="1090" y="411" text-anchor="middle" font-size="10.5" fill="#1c1e21">filled, in full or in part</text>
+<text x="1090" y="426" text-anchor="middle" font-size="10.5" fill="#1c1e21">expired unfilled, or cancelled</text>
+<text x="1090" y="475" text-anchor="middle" font-size="10.5" font-style="italic" fill="#7e22ce">rule: comes from a review decision</text>
+<rect x="1240" y="300" width="195" height="150" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
+<text x="1337.5" y="345.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Brokerage account</text>
+<text x="1337.5" y="365.25" text-anchor="middle" font-size="11.5" fill="#44403c">the source of truth:</text>
+<text x="1337.5" y="381.25" text-anchor="middle" font-size="11.5" fill="#44403c">cash and holdings,</text>
+<text x="1337.5" y="397.25" text-anchor="middle" font-size="11.5" fill="#44403c">deposits, withdrawals,</text>
+<text x="1337.5" y="413.25" text-anchor="middle" font-size="11.5" fill="#44403c">fills, splits, dividends</text>
+<rect x="990" y="500" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+<circle cx="1005" cy="515" r="9" fill="#0d9488"/>
+<text x="1005" y="518.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1</text>
+<text x="1020" y="519" font-size="11" font-weight="700" fill="#1c1e21">Order not filled</text>
+<text x="1002" y="535" font-size="10" fill="#374151">price went above my limit:</text>
+<text x="1002" y="547" font-size="10" fill="#374151">expired; back to the next review</text>
+<polyline points="1090,486 1090,500" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
+<rect x="1234" y="464" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+<circle cx="1249" cy="479" r="9" fill="#0d9488"/>
+<text x="1249" y="482.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">2</text>
+<text x="1264" y="483" font-size="11" font-weight="700" fill="#1c1e21">Stock split</text>
+<text x="1246" y="499" font-size="10" fill="#374151">no order, new share count: the</text>
+<text x="1246" y="511" font-size="10" fill="#374151">broker's numbers win; reason noted</text>
+<polyline points="1337,450 1337,464" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
+<polyline points="195,238 140,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="158" y="268" text-anchor="end" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  gathers</text>
+<polyline points="280,238 360,288" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="330" y="262" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  reads</text>
+<polyline points="245,238 245,518" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="253" y="492" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">3</tspan>  builds the report</text>
+<polyline points="643,215 477,320" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="506" y="232" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">1</tspan>  keeps the list</text>
+<polyline points="357,563 618,450" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="506" y="542" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">4</tspan>  read in the review</text>
+<polyline points="730,238 730,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="738" y="272" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">5</tspan>  decides</text>
+<polyline points="1337,218 1337,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1345" y="262" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">6</tspan>  I deposit it</text>
+<polyline points="817,193 1090,193 1090,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="992" y="187" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">7</tspan>  places orders</text>
+<polyline points="1192,350 1238,350" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1215" y="344" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">8</tspan>  sent</text>
+<polyline points="1238,400 1192,400" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1215" y="394" text-anchor="middle" font-size="11" fill="#6b7280">back</text>
+<polyline points="1238,430 1215,430 1215,700 245,700 245,608" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="730" y="694" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  Claude Code reads my balance and holdings   ·   <tspan font-weight="700">9</tspan>  results feed the next report</text>
+<text x="40" y="788" font-size="14" font-weight="600" fill="#1c1e21">What happens, in order, and why</text>
+<text x="40" y="816" font-size="12" fill="#1c1e21"><tspan font-weight="700">1</tspan>   I keep a watchlist: companies I own or consider, each with the reason I like it.</text>
+<text x="40" y="837" font-size="12" fill="#1c1e21"><tspan font-weight="700">2</tspan>   Every two weeks Claude Code gathers price and P/E, checks the moats against the news, and reads my balance from the broker.</text>
+<text x="40" y="858" font-size="12" fill="#1c1e21"><tspan font-weight="700">3</tspan>   Claude Code builds the report from all of it, with the date and source of every number.</text>
+<text x="40" y="879" font-size="12" fill="#1c1e21"><tspan font-weight="700">4</tspan>   I read the report in the review. Any difference from the broker is explained before anything else.</text>
+<text x="40" y="900" font-size="12" fill="#1c1e21"><tspan font-weight="700">5</tspan>   I decide, company by company: buy with the next paycheck, sell, or hold.</text>
+<text x="40" y="921" font-size="12" fill="#1c1e21"><tspan font-weight="700">6</tspan>   The paycheck arrives and I deposit it. The broker records the deposit, not me.</text>
+<text x="40" y="942" font-size="12" fill="#1c1e21"><tspan font-weight="700">7</tspan>   I place the orders the review decided, each with a limit price.</text>
+<text x="40" y="963" font-size="12" fill="#1c1e21"><tspan font-weight="700">8</tspan>   The broker fills an order, in full or in part, or it expires unfilled when the price runs above my limit.</text>
+<text x="40" y="984" font-size="12" fill="#1c1e21"><tspan font-weight="700">9</tspan>   The results show up in the broker's numbers and feed the next report.</text>
+<text x="890" y="788" font-size="14" font-weight="600" fill="#7e22ce">Rules</text>
+<text x="890" y="816" font-size="11.5" fill="#1c1e21">•  The brokerage account is the source of truth.</text>
+<text x="902" y="832" font-size="11.5" fill="#1c1e21">My records never override it.</text>
+<text x="890" y="854" font-size="11.5" fill="#1c1e21">•  Every number on the report carries its date and its source.</text>
+<text x="890" y="876" font-size="11.5" fill="#1c1e21">•  The broker wins any disagreement, and every difference</text>
+<text x="902" y="892" font-size="11.5" fill="#1c1e21">gets a reason before I decide.</text>
+<text x="890" y="914" font-size="11.5" fill="#1c1e21">•  I don't own prices, fills, splits or dividends: I only record</text>
+<text x="902" y="930" font-size="11.5" fill="#1c1e21">what I saw, and when.</text>
+<text x="890" y="952" font-size="11.5" fill="#1c1e21">•  Assumed: I buy only from the watchlist, and every order</text>
+<text x="902" y="968" font-size="11.5" fill="#1c1e21">comes from a review decision.</text>
+<text x="890" y="990" font-size="11.5" fill="#1c1e21">•  Assumed: a review never plans more than the paycheck</text>
+<text x="902" y="1006" font-size="11.5" fill="#1c1e21">plus the cash already in the account.</text>
+</svg>
