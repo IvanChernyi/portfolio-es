@@ -1,190 +1,271 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 1204" width="1460" height="1204" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 1348" width="1460" height="1348" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="13">
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
 <marker id="arrow-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ca3af" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
-<marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
 </defs>
-<rect width="1460" height="1204" fill="#ffffff"/>
-<text x="730" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#1c1e21">My brokerage routine as one record: a company I follow</text>
-<text x="730" y="56" text-anchor="middle" font-size="13" fill="#6b7280">the one-aggregate model, tried "just to see" · one record per company · the watchlist and the report are views · the brokerage account is outside and is the truth</text>
-<text x="730" y="76" text-anchor="middle" font-size="12" fill="#6b7280">yellow: people · pale: the record · green: views · pink: outside, not mine · small teal cards: five real contingencies · orange: facts in one company's story</text>
-<rect x="20" y="748" width="1420" height="198" rx="10" fill="#fffbeb" stroke="#fde68a"/>
-<rect x="20" y="956" width="1420" height="228" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
-<rect x="20" y="100" width="460" height="640" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" data-zone="1"/>
-<text x="36" y="124" font-size="14" font-weight="700" fill="#1c1e21">1  Gather</text>
-<text x="36" y="141" font-size="11.5" fill="#64748b">Claude Code prepares the report</text>
-<rect x="500" y="100" width="460" height="640" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" data-zone="1"/>
-<text x="516" y="124" font-size="14" font-weight="700" fill="#1c1e21">2  Decide</text>
-<text x="516" y="141" font-size="11.5" fill="#64748b">I read it and choose, company by company</text>
-<rect x="980" y="100" width="460" height="640" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" data-zone="1"/>
-<text x="996" y="124" font-size="14" font-weight="700" fill="#1c1e21">3  Act</text>
-<text x="996" y="141" font-size="11.5" fill="#64748b">I request orders; the broker answers</text>
-<rect x="150" y="150" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4"/>
-<text x="235" y="180.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Claude Code</text>
-<text x="235" y="199.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: a reliable report</text>
-<text x="235" y="214.25" text-anchor="middle" font-size="11.5" fill="#44403c">every two weeks</text>
-<rect x="35" y="300" width="190" height="70" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
-<text x="130" y="329.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1e21">Market data and news</text>
-<text x="130" y="348.4" text-anchor="middle" font-size="11.5" fill="#44403c">price, P/E, company news</text>
-<rect x="265" y="300" width="210" height="86" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.4"/>
-<text x="370" y="330.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Watchlist</text>
-<text x="370" y="349.25" text-anchor="middle" font-size="11.5" fill="#44403c">every company I follow,</text>
-<text x="370" y="364.25" text-anchor="middle" font-size="11.5" fill="#44403c">and its stage</text>
-<rect x="135" y="520" width="220" height="86" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.4"/>
-<text x="245" y="550.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Report</text>
-<text x="245" y="569.25" text-anchor="middle" font-size="11.5" fill="#44403c">every two weeks: valuations,</text>
-<text x="245" y="584.25" text-anchor="middle" font-size="11.5" fill="#44403c">moats, news, my balance</text>
-<rect x="645" y="150" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4"/>
-<text x="730" y="180.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Me, the investor</text>
-<text x="730" y="199.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: invest each paycheck</text>
-<text x="730" y="214.25" text-anchor="middle" font-size="11.5" fill="#44403c">well, on reliable facts</text>
-<rect x="600" y="300" width="260" height="230" rx="10" fill="#fef9c3"/>
-<path d="M610,300 L850,300 Q860,300 860,310 L860,322 L600,322 L600,310 Q600,300 610,300 Z" fill="#fde68a"/>
-<line x1="600" y1="322" x2="860" y2="322" stroke="#a16207" stroke-width="1"/>
-<rect x="600" y="300" width="260" height="230" rx="10" fill="none" stroke="#a16207" stroke-width="2.4"/>
-<text x="730" y="315" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing="1.1" fill="#92400e">ONE PER COMPANY I FOLLOW</text>
-<text x="730" y="346" text-anchor="middle" font-size="18" font-weight="700" fill="#1c1e21">Company</text>
-<text x="730" y="363" text-anchor="middle" font-size="11" fill="#44403c">decided by me</text>
-<text x="730" y="384" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1c1e21">considered  →  owned  →  sold</text>
-<text x="730" y="406" text-anchor="middle" font-size="10.5" fill="#1c1e21">added, with the reason</text>
-<text x="730" y="421" text-anchor="middle" font-size="10.5" fill="#1c1e21">reviewed: price, P/E, moat</text>
-<text x="730" y="436" text-anchor="middle" font-size="10.5" fill="#1c1e21">order requested</text>
-<text x="730" y="451" text-anchor="middle" font-size="10.5" fill="#1c1e21">order completed, or expired</text>
-<text x="730" y="466" text-anchor="middle" font-size="10.5" fill="#1c1e21">split or dividend noted</text>
-<text x="730" y="481" text-anchor="middle" font-size="10.5" fill="#1c1e21">sold, or removed</text>
-<text x="730" y="518" text-anchor="middle" font-size="10.5" font-style="italic" fill="#7e22ce">rule: its facts must fit its story</text>
-<rect x="630" y="545" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
-<circle cx="645" cy="560" r="9" fill="#0d9488"/>
-<text x="645" y="563.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">4</text>
-<text x="660" y="564" font-size="11" font-weight="700" fill="#1c1e21">Bought off the list</text>
-<text x="642" y="580" font-size="10" fill="#374151">an IPO, say: the record starts</text>
-<text x="642" y="592" font-size="10" fill="#374151">at "order requested"; marked</text>
-<polyline points="730,530 730,545" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
-<rect x="630" y="611" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
-<circle cx="645" cy="626" r="9" fill="#0d9488"/>
-<text x="645" y="629.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">5</text>
-<text x="660" y="630" font-size="11" font-weight="700" fill="#1c1e21">Bought between reviews</text>
-<text x="642" y="646" font-size="10" fill="#374151">a dip alert, cash to spare:</text>
-<text x="642" y="658" font-size="10" fill="#374151">allowed, and marked as such</text>
-<polyline points="730,599 730,611" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
-<rect x="1240" y="150" width="195" height="66" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
-<text x="1337.5" y="177.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1e21">Paycheck</text>
-<text x="1337.5" y="196.4" text-anchor="middle" font-size="11.5" fill="#44403c">from my employer</text>
-<rect x="995" y="300" width="195" height="66" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
-<text x="1092.5" y="327.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1e21">Broker alert</text>
-<text x="1092.5" y="346.4" text-anchor="middle" font-size="11.5" fill="#44403c">a big dip in something I own</text>
-<rect x="1240" y="300" width="195" height="150" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4"/>
-<text x="1337.5" y="345.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Brokerage account</text>
-<text x="1337.5" y="365.25" text-anchor="middle" font-size="11.5" fill="#44403c">the source of truth:</text>
-<text x="1337.5" y="381.25" text-anchor="middle" font-size="11.5" fill="#44403c">cash and holdings,</text>
-<text x="1337.5" y="397.25" text-anchor="middle" font-size="11.5" fill="#44403c">deposits, withdrawals,</text>
-<text x="1337.5" y="413.25" text-anchor="middle" font-size="11.5" fill="#44403c">fills, splits, dividends</text>
-<rect x="990" y="470" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
-<circle cx="1005" cy="485" r="9" fill="#0d9488"/>
-<text x="1005" y="488.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1</text>
-<text x="1020" y="489" font-size="11" font-weight="700" fill="#1c1e21">Order not filled</text>
-<text x="1002" y="505" font-size="10" fill="#374151">price went above my limit:</text>
-<text x="1002" y="517" font-size="10" fill="#374151">"order expired" on the company</text>
-<rect x="990" y="536" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
-<circle cx="1005" cy="551" r="9" fill="#0d9488"/>
-<text x="1005" y="554.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">2</text>
-<text x="1020" y="555" font-size="11" font-weight="700" fill="#1c1e21">Stock split</text>
-<text x="1002" y="571" font-size="10" fill="#374151">no order, new share count:</text>
-<text x="1002" y="583" font-size="10" fill="#374151">"split noted" on the company</text>
-<rect x="990" y="602" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
-<circle cx="1005" cy="617" r="9" fill="#0d9488"/>
-<text x="1005" y="620.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">3</text>
-<text x="1020" y="621" font-size="11" font-weight="700" fill="#1c1e21">Report differs from broker</text>
-<text x="1002" y="637" font-size="10" fill="#374151">the broker wins; the reason</text>
-<text x="1002" y="649" font-size="10" fill="#374151">is noted on the company</text>
-<polyline points="195,238 140,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="158" y="268" text-anchor="end" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  gathers</text>
-<polyline points="280,238 360,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="332" y="264" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  reads</text>
-<polyline points="245,238 245,518" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="253" y="492" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">3</tspan>  builds the report</text>
-<polyline points="598,343 477,343" fill="none" stroke="#9ca3af" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#arrow-grey)"/>
-<text x="545" y="337" text-anchor="middle" font-size="11" fill="#6b7280">built from</text>
-<polyline points="730,238 730,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="738" y="266" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">1</tspan>  adds ·</text>
-<text x="738" y="282" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">5</tspan>  decides</text>
-<polyline points="357,563 598,480" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="506" y="548" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">4</tspan>  read in the report</text>
-<polyline points="1337,218 1337,298" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="1345" y="262" font-size="11.5" fill="#1c1e21">I deposit it</text>
-<polyline points="817,180 1215,180 1215,340 1238,340" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="992" y="174" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">6</tspan>  requests the order</text>
-<polyline points="1238,440 862,440" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="992" y="434" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">7</tspan>  I record what came back</text>
-<polyline points="993,333 817,222" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arrow-red)"/>
-<text x="880" y="248" font-size="11.5" fill="#b91c1c"><tspan font-weight="700">!</tspan>  dip alert</text>
-<polyline points="1337,452 1337,700 245,700 245,608" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="730" y="694" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  Claude Code reads my balance and holdings   ·   <tspan font-weight="700">8</tspan>  results feed the next report</text>
-<text x="40" y="768" font-size="14" font-weight="600" fill="#1c1e21">One company's story, as you told it</text>
-<rect x="60" y="780" width="486" height="16" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
-<text x="303" y="792" text-anchor="middle" font-size="10.5" font-weight="700" fill="#374151">CONSIDERED</text>
-<rect x="564" y="780" width="822" height="16" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
-<text x="975" y="792" text-anchor="middle" font-size="10.5" font-weight="700" fill="#374151">OWNED</text>
-<rect x="60" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="135" y="824" text-anchor="middle" font-size="11" fill="#1c1e21">Added to the</text>
-<text x="135" y="838" text-anchor="middle" font-size="11" fill="#1c1e21">watchlist: strong</text>
-<text x="135" y="852" text-anchor="middle" font-size="11" fill="#1c1e21">moat, low valuation</text>
-<rect x="228" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="303" y="824" text-anchor="middle" font-size="11" fill="#1c1e21">Reviewed over a</text>
-<text x="303" y="838" text-anchor="middle" font-size="11" fill="#1c1e21">few paychecks:</text>
-<text x="303" y="852" text-anchor="middle" font-size="11" fill="#1c1e21">still attractive</text>
-<polyline points="212,834 226,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="396" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="471" y="838" text-anchor="middle" font-size="11" fill="#1c1e21">Order requested</text>
-<polyline points="380,834 394,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="564" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="639" y="838" text-anchor="middle" font-size="11" fill="#1c1e21">Order completed</text>
-<polyline points="548,834 562,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="732" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="807" y="831" text-anchor="middle" font-size="11" fill="#1c1e21">Reviewed again:</text>
-<text x="807" y="845" text-anchor="middle" font-size="11" fill="#1c1e21">attractive again</text>
-<polyline points="716,834 730,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="900" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="975" y="838" text-anchor="middle" font-size="11" fill="#1c1e21">Order requested</text>
-<polyline points="884,834 898,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="1068" y="806" width="150" height="56" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="1.2"/>
-<text x="1143" y="831" text-anchor="middle" font-size="11" fill="#1c1e21">Order completed:</text>
-<text x="1143" y="845" text-anchor="middle" font-size="11" fill="#1c1e21">the position grows</text>
-<polyline points="1052,834 1066,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="1236" y="806" width="150" height="56" rx="5" fill="#fff7ed" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="5 3"/>
-<text x="1311" y="824" text-anchor="middle" font-size="11" fill="#1c1e21">Dip alert: order</text>
-<text x="1311" y="838" text-anchor="middle" font-size="11" fill="#1c1e21">requested between</text>
-<text x="1311" y="852" text-anchor="middle" font-size="11" fill="#1c1e21">reviews</text>
-<polyline points="1220,834 1234,834" fill="none" stroke="#9ca3af" stroke-width="1.4" marker-end="url(#arrow-grey)"/>
-<rect x="188" y="884" width="190" height="50" rx="5" fill="#fff7ed" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="5 3"/>
-<text x="283" y="905" text-anchor="middle" font-size="11" fill="#1c1e21">Or it starts here: an IPO bought</text>
-<text x="283" y="920" text-anchor="middle" font-size="11" fill="#1c1e21">with no watchlist entry first</text>
-<polyline points="380,904 436,864" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arrow-red)"/>
-<text x="40" y="984" font-size="14" font-weight="600" fill="#0f766e">Suggestions, not rules: nothing here is refused</text>
-<text x="40" y="1010" font-size="11.5" fill="#1c1e21">•  Watch a company before buying it. A buy off the list goes through and is marked.</text>
-<text x="40" y="1032" font-size="11.5" fill="#1c1e21">•  Buy at review time. A buy between reviews goes through and is marked.</text>
-<text x="40" y="1054" font-size="11.5" fill="#1c1e21">•  Stay within the paycheck plus spare cash. The report shows the total; nothing blocks it.</text>
-<text x="40" y="1084" font-size="14" font-weight="600" fill="#7e22ce">The only real rules: the story has to make sense</text>
-<text x="40" y="1108" font-size="11.5" fill="#1c1e21">•  An order is completed or expired only after it was requested.</text>
-<text x="40" y="1130" font-size="11.5" fill="#1c1e21">•  A company is followed once: one record per company.</text>
-<text x="40" y="1152" font-size="11.5" fill="#1c1e21">•  The broker's numbers win over mine; I record what I saw, and when.</text>
-<text x="800" y="984" font-size="14" font-weight="600" fill="#1c1e21">Two models of the same routine</text>
-<text x="990" y="1010" font-size="11.5" font-weight="700" fill="#1c1e21">Three records</text>
-<text x="1200" y="1010" font-size="11.5" font-weight="700" fill="#1c1e21">One record per company</text>
-<line x1="800" y1="1017" x2="1420" y2="1017" stroke="#d1d5db"/>
-<text x="800" y="1036" font-size="11.5" fill="#374151">A review</text>
-<text x="990" y="1036" font-size="11.5" fill="#1c1e21">its own record</text>
-<text x="1200" y="1036" font-size="11.5" fill="#1c1e21">a fact on each company</text>
-<text x="800" y="1057" font-size="11.5" fill="#374151">The watchlist</text>
-<text x="990" y="1057" font-size="11.5" fill="#1c1e21">a record</text>
-<text x="1200" y="1057" font-size="11.5" fill="#1c1e21">a view</text>
-<text x="800" y="1078" font-size="11.5" fill="#374151">The paycheck budget</text>
-<text x="990" y="1078" font-size="11.5" fill="#1c1e21">checked on the review</text>
-<text x="1200" y="1078" font-size="11.5" fill="#1c1e21">seen only on the report</text>
-<text x="800" y="1099" font-size="11.5" fill="#374151">One company's history</text>
-<text x="990" y="1099" font-size="11.5" fill="#1c1e21">spread over three records</text>
-<text x="1200" y="1099" font-size="11.5" fill="#1c1e21">in one place</text>
-<text x="800" y="1120" font-size="11.5" fill="#374151">Best for</text>
-<text x="990" y="1120" font-size="11.5" fill="#1c1e21">deciding this paycheck</text>
-<text x="1200" y="1120" font-size="11.5" fill="#1c1e21">following a company over time</text>
+<rect width="1460" height="1348" fill="#ffffff"/>
+<text x="730" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#1c1e21">My brokerage routine as one record: the Watchlist</text>
+<text x="730" y="56" text-anchor="middle" font-size="13" fill="#6b7280">a single aggregate, decided by me · two things outside that I can't control: the market and the broker · 16 scenarios, 5 of them real</text>
+<text x="730" y="76" text-anchor="middle" font-size="12" fill="#6b7280">yellow: people · pale: the record, with its five parts · green: a view · pink: outside · scenario cards carry the tag of the part that answers them</text>
+<rect x="20" y="1170" width="1420" height="158" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+<rect x="20" y="906" width="1420" height="250" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+<rect x="60" y="116" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4" data-card="1"/>
+<text x="145" y="146.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Me, the investor</text>
+<text x="145" y="165.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: invest each paycheck</text>
+<text x="145" y="180.25" text-anchor="middle" font-size="11.5" fill="#44403c">well, on reliable facts</text>
+<rect x="430" y="116" width="220" height="86" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.4" data-card="1"/>
+<text x="540" y="146.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Report</text>
+<text x="540" y="165.25" text-anchor="middle" font-size="11.5" fill="#44403c">every two weeks: valuations,</text>
+<text x="540" y="180.25" text-anchor="middle" font-size="11.5" fill="#44403c">moats, news, my balance</text>
+<rect x="850" y="116" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4" data-card="1"/>
+<text x="935" y="146.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Claude Code</text>
+<text x="935" y="165.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: a reliable report</text>
+<text x="935" y="180.25" text-anchor="middle" font-size="11.5" fill="#44403c">every two weeks</text>
+<rect x="1160" y="250" width="240" height="92" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4" data-card="1"/>
+<text x="1280" y="283.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">The market</text>
+<text x="1280" y="302.25" text-anchor="middle" font-size="11.5" fill="#44403c">prices, P/E, news, IPOs,</text>
+<text x="1280" y="317.25" text-anchor="middle" font-size="11.5" fill="#44403c">renames and takeovers</text>
+<rect x="1160" y="390" width="240" height="150" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4" data-card="1"/>
+<text x="1280" y="435.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">The broker</text>
+<text x="1280" y="455.25" text-anchor="middle" font-size="11.5" fill="#44403c">holds the truth: cash, holdings,</text>
+<text x="1280" y="471.25" text-anchor="middle" font-size="11.5" fill="#44403c">deposits and withdrawals;</text>
+<text x="1280" y="487.25" text-anchor="middle" font-size="11.5" fill="#44403c">sends completions, expiries,</text>
+<text x="1280" y="503.25" text-anchor="middle" font-size="11.5" fill="#44403c">splits, dividends and alerts</text>
+<rect x="60" y="280" width="1000" height="276" rx="12" fill="#fef9c3" data-card="1"/>
+<path d="M72,280 L1048,280 Q1060,280 1060,292 L1060,304 L60,304 L60,292 Q60,280 72,280 Z" fill="#fde68a"/>
+<line x1="60" y1="304" x2="1060" y2="304" stroke="#a16207" stroke-width="1"/>
+<rect x="60" y="280" width="1000" height="276" rx="12" fill="none" stroke="#a16207" stroke-width="2.6"/>
+<text x="560" y="296" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.4" fill="#92400e">THE ONE RECORD · A SINGLE AGGREGATE</text>
+<text x="560" y="332" text-anchor="middle" font-size="21" font-weight="700" fill="#1c1e21">Watchlist</text>
+<text x="560" y="350" text-anchor="middle" font-size="11.5" fill="#44403c">decided by me · every company I own or consider, and everything I do about them</text>
+<rect x="80" y="366" width="184" height="118" rx="7" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" data-part="1"/>
+<path d="M87,366 L257,366 Q264,366 264,373 L264,388 L80,388 L80,373 Q80,366 87,366 Z" fill="#dbeafe"/>
+<text x="172" y="381" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">FOLLOWING</text>
+<text x="172" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">company added, with the reason</text>
+<text x="172" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">stage: considered, owned, sold</text>
+<text x="172" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">renamed or acquired</text>
+<text x="172" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">stopped following</text>
+<rect x="274" y="366" width="184" height="118" rx="7" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" data-part="1"/>
+<path d="M281,366 L451,366 Q458,366 458,373 L458,388 L274,388 L274,373 Q274,366 281,366 Z" fill="#ede9fe"/>
+<text x="366" y="381" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">REVIEWING</text>
+<text x="366" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">report read, as of its date</text>
+<text x="366" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">reviewed: price, P/E, moat</text>
+<text x="366" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">decided: buy, sell or hold</text>
+<text x="366" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">review closed</text>
+<rect x="468" y="366" width="184" height="118" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" data-part="1"/>
+<path d="M475,366 L645,366 Q652,366 652,373 L652,388 L468,388 L468,373 Q468,366 475,366 Z" fill="#dcfce7"/>
+<text x="560" y="381" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">FUNDING</text>
+<text x="560" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">paycheck budget set</text>
+<text x="560" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">deposit seen at the broker</text>
+<text x="560" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">withdrawal seen</text>
+<text x="560" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">dividend noted</text>
+<rect x="662" y="366" width="184" height="118" rx="7" fill="#ffffff" stroke="#ea580c" stroke-width="1.2" data-part="1"/>
+<path d="M669,366 L839,366 Q846,366 846,373 L846,388 L662,388 L662,373 Q662,366 669,366 Z" fill="#ffedd5"/>
+<text x="754" y="381" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">ORDERING</text>
+<text x="754" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">requested: qty, limit, price</text>
+<text x="754" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">marked: off-list, off-cycle</text>
+<text x="754" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">completed, in full or in part</text>
+<text x="754" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">expired, cancelled, duplicate</text>
+<rect x="856" y="366" width="184" height="118" rx="7" fill="#ffffff" stroke="#475569" stroke-width="1.2" data-part="1"/>
+<path d="M863,366 L1033,366 Q1040,366 1040,373 L1040,388 L856,388 L856,373 Q856,366 863,366 Z" fill="#e2e8f0"/>
+<text x="948" y="381" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">CHECKING</text>
+<text x="948" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">difference explained</text>
+<text x="948" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">split noted</text>
+<text x="948" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">broker's count adopted</text>
+<text x="948" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">number missing, dated</text>
+<text x="560" y="508" text-anchor="middle" font-size="10.5" font-style="italic" fill="#7e22ce">rules: a company is listed once · an order completes or expires only if it was requested</text>
+<text x="560" y="524" text-anchor="middle" font-size="10.5" font-style="italic" fill="#7e22ce">a closed review never changes · the broker's numbers win over mine</text>
+<text x="560" y="544" text-anchor="middle" font-size="10.5" font-style="italic" fill="#0f766e">everything else is a suggestion: it goes through, and is marked</text>
+<polyline points="232,159 428,159" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="330" y="153" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">4</tspan>  reads</text>
+<polyline points="848,159 652,159" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="750" y="153" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">3</tspan>  builds</text>
+<polyline points="145,204 145,278" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="153" y="246" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">1 · 5 · 6</tspan>  I record what I decide</text>
+<polyline points="935,204 935,278" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="943" y="246" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  reads the list</text>
+<polyline points="1022,145 1430,145 1430,465 1402,465" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1036" y="139" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  reads my numbers</text>
+<polyline points="1022,180 1280,180 1280,248" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1036" y="174" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  gathers prices and news</text>
+<polyline points="1062,440 1158,440" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1110" y="434" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">6</tspan>  the order</text>
+<polyline points="1158,490 1062,490" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1110" y="484" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">7 · 8</tspan>  answers</text>
+<text x="40" y="592" font-size="14" font-weight="600" fill="#1c1e21">Scenarios: what can happen, and the part of the record that answers it</text>
+<rect x="620" y="580" width="34" height="16" rx="5" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+<text x="664" y="592" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">5</tspan>  happened to me</text>
+<rect x="800" y="580" width="34" height="16" rx="5" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="844" y="592" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">11</tspan>  could happen: to check against my real routine</text>
+<rect x="40" y="614" width="72" height="16" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1" data-chip="1"/>
+<text x="76" y="625.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Following</text>
+<rect x="40" y="634" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="55" cy="649" r="9" fill="#0d9488"/>
+<text x="55" y="652.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">4</text>
+<text x="70" y="653" font-size="11" font-weight="700" fill="#1c1e21">Bought off the list</text>
+<text x="52" y="669" font-size="10" fill="#374151">an IPO: the order comes first,</text>
+<text x="52" y="681" font-size="10" fill="#374151">the company is added after</text>
+<rect x="272" y="614" width="72" height="16" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1" data-chip="1"/>
+<text x="308" y="625.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Following</text>
+<rect x="272" y="634" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="287" cy="649" r="9" fill="#d97706"/>
+<text x="287" y="652.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12</text>
+<text x="302" y="653" font-size="11" font-weight="700" fill="#1c1e21">Renamed or acquired</text>
+<text x="284" y="669" font-size="10" fill="#374151">a new ticker or a new owner:</text>
+<text x="284" y="681" font-size="10" fill="#374151">the entry continues, renamed</text>
+<rect x="504" y="614" width="72" height="16" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1" data-chip="1"/>
+<text x="540" y="625.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Following</text>
+<rect x="504" y="634" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="519" cy="649" r="9" fill="#d97706"/>
+<text x="519" y="652.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">14</text>
+<text x="534" y="653" font-size="11" font-weight="700" fill="#1c1e21">Sold a company</text>
+<text x="516" y="669" font-size="10" fill="#374151">the stage becomes sold; it stays</text>
+<text x="516" y="681" font-size="10" fill="#374151">on the list, or I stop following</text>
+<rect x="736" y="614" width="72" height="16" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1" data-chip="1"/>
+<text x="772" y="625.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Reviewing</text>
+<rect x="736" y="634" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="751" cy="649" r="9" fill="#d97706"/>
+<text x="751" y="652.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">9</text>
+<text x="766" y="653" font-size="11" font-weight="700" fill="#1c1e21">Review skipped or late</text>
+<text x="748" y="669" font-size="10" fill="#374151">three weeks instead of two:</text>
+<text x="748" y="681" font-size="10" fill="#374151">the next review covers the gap</text>
+<rect x="968" y="614" width="72" height="16" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1" data-chip="1"/>
+<text x="1004" y="625.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Reviewing</text>
+<rect x="968" y="634" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="983" cy="649" r="9" fill="#d97706"/>
+<text x="983" y="652.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">13</text>
+<text x="998" y="653" font-size="11" font-weight="700" fill="#1c1e21">Moat in doubt</text>
+<text x="980" y="669" font-size="10" fill="#374151">bad news about a company I own:</text>
+<text x="980" y="681" font-size="10" fill="#374151">reviewed as in doubt; hold or sell</text>
+<rect x="1200" y="614" width="72" height="16" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1" data-chip="1"/>
+<text x="1236" y="625.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Reviewing</text>
+<rect x="1200" y="634" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="1215" cy="649" r="9" fill="#d97706"/>
+<text x="1215" y="652.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">16</text>
+<text x="1230" y="653" font-size="11" font-weight="700" fill="#1c1e21">A number is missing</text>
+<text x="1212" y="669" font-size="10" fill="#374151">a source is down on review day:</text>
+<text x="1212" y="681" font-size="10" fill="#374151">marked missing, with the date</text>
+<rect x="40" y="710" width="60" height="16" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1" data-chip="1"/>
+<text x="70" y="721.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Funding</text>
+<rect x="40" y="730" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="55" cy="745" r="9" fill="#d97706"/>
+<text x="55" y="748.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">7</text>
+<text x="70" y="749" font-size="11" font-weight="700" fill="#1c1e21">Deposit not there yet</text>
+<text x="52" y="765" font-size="10" fill="#374151">the paycheck is still on its way:</text>
+<text x="52" y="777" font-size="10" fill="#374151">the budget waits; so do orders</text>
+<rect x="272" y="710" width="60" height="16" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1" data-chip="1"/>
+<text x="302" y="721.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Funding</text>
+<rect x="272" y="730" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="287" cy="745" r="9" fill="#d97706"/>
+<text x="287" y="748.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">8</text>
+<text x="302" y="749" font-size="11" font-weight="700" fill="#1c1e21">Dividend paid in cash</text>
+<text x="284" y="765" font-size="10" fill="#374151">cash grows with no order:</text>
+<text x="284" y="777" font-size="10" fill="#374151">noted; it joins the next budget</text>
+<rect x="504" y="710" width="60" height="16" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1" data-chip="1"/>
+<text x="534" y="721.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Funding</text>
+<rect x="504" y="730" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="519" cy="745" r="9" fill="#d97706"/>
+<text x="519" y="748.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">15</text>
+<text x="534" y="749" font-size="11" font-weight="700" fill="#1c1e21">Cash taken out</text>
+<text x="516" y="765" font-size="10" fill="#374151">a withdrawal shrinks the cash:</text>
+<text x="516" y="777" font-size="10" fill="#374151">seen at the broker; budget drops</text>
+<rect x="736" y="710" width="66" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="769" y="721.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Ordering</text>
+<rect x="736" y="730" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="751" cy="745" r="9" fill="#0d9488"/>
+<text x="751" y="748.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1</text>
+<text x="766" y="749" font-size="11" font-weight="700" fill="#1c1e21">Order not completed</text>
+<text x="748" y="765" font-size="10" fill="#374151">price ran above my limit:</text>
+<text x="748" y="777" font-size="10" fill="#374151">expired; decided again at review</text>
+<rect x="968" y="710" width="66" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="1001" y="721.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Ordering</text>
+<rect x="968" y="730" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="983" cy="745" r="9" fill="#0d9488"/>
+<text x="983" y="748.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">5</text>
+<text x="998" y="749" font-size="11" font-weight="700" fill="#1c1e21">Bought between reviews</text>
+<text x="980" y="765" font-size="10" fill="#374151">a dip alert, cash to spare:</text>
+<text x="980" y="777" font-size="10" fill="#374151">allowed; marked off-cycle</text>
+<rect x="1200" y="710" width="66" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="1233" y="721.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Ordering</text>
+<rect x="1200" y="730" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="1215" cy="745" r="9" fill="#d97706"/>
+<text x="1215" y="748.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6</text>
+<text x="1230" y="749" font-size="11" font-weight="700" fill="#1c1e21">Completed only in part</text>
+<text x="1212" y="765" font-size="10" fill="#374151">half the shares arrive:</text>
+<text x="1212" y="777" font-size="10" fill="#374151">recorded in part; the rest expires</text>
+<rect x="40" y="806" width="66" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="73" y="817.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Ordering</text>
+<rect x="40" y="826" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="55" cy="841" r="9" fill="#d97706"/>
+<text x="55" y="844.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">10</text>
+<text x="70" y="845" font-size="11" font-weight="700" fill="#1c1e21">Price moved since report</text>
+<text x="52" y="861" font-size="10" fill="#374151">the order copies the price I</text>
+<text x="52" y="873" font-size="10" fill="#374151">saw; the limit does the guarding</text>
+<rect x="272" y="806" width="66" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="305" y="817.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Ordering</text>
+<rect x="272" y="826" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="287" cy="841" r="9" fill="#d97706"/>
+<text x="287" y="844.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">11</text>
+<text x="302" y="845" font-size="11" font-weight="700" fill="#1c1e21">Same order sent twice</text>
+<text x="284" y="861" font-size="10" fill="#374151">a double tap on the phone:</text>
+<text x="284" y="873" font-size="10" fill="#374151">the second is marked a duplicate</text>
+<rect x="504" y="806" width="66" height="16" rx="8" fill="#e2e8f0" stroke="#475569" stroke-width="1" data-chip="1"/>
+<text x="537" y="817.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Checking</text>
+<rect x="504" y="826" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="519" cy="841" r="9" fill="#0d9488"/>
+<text x="519" y="844.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">2</text>
+<text x="534" y="845" font-size="11" font-weight="700" fill="#1c1e21">Stock split</text>
+<text x="516" y="861" font-size="10" fill="#374151">no order, new share count:</text>
+<text x="516" y="873" font-size="10" fill="#374151">noted; the broker's count adopted</text>
+<rect x="736" y="806" width="66" height="16" rx="8" fill="#e2e8f0" stroke="#475569" stroke-width="1" data-chip="1"/>
+<text x="769" y="817.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Checking</text>
+<rect x="736" y="826" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="751" cy="841" r="9" fill="#0d9488"/>
+<text x="751" y="844.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">3</text>
+<text x="766" y="845" font-size="11" font-weight="700" fill="#1c1e21">Report differs from broker</text>
+<text x="748" y="861" font-size="10" fill="#374151">the broker wins; the reason</text>
+<text x="748" y="873" font-size="10" fill="#374151">is recorded before I decide</text>
+<text x="40" y="934" font-size="14" font-weight="600" fill="#1c1e21">What happens, in order</text>
+<text x="40" y="962" font-size="12" fill="#1c1e21"><tspan font-weight="700">1</tspan>   I add a company to the watchlist, with the reason. An IPO can go straight to an order instead.</text>
+<text x="40" y="983" font-size="12" fill="#1c1e21"><tspan font-weight="700">2</tspan>   Every two weeks Claude Code reads the list, gathers prices, P/E and news from the market, and reads my numbers from the broker.</text>
+<text x="40" y="1004" font-size="12" fill="#1c1e21"><tspan font-weight="700">3</tspan>   Claude Code builds the report, with the date and source of every number.</text>
+<text x="40" y="1025" font-size="12" fill="#1c1e21"><tspan font-weight="700">4</tspan>   I read the report. Any difference from the broker is explained before anything else.</text>
+<text x="40" y="1046" font-size="12" fill="#1c1e21"><tspan font-weight="700">5</tspan>   I review each company and decide: buy, sell or hold. The paycheck is the budget.</text>
+<text x="40" y="1067" font-size="12" fill="#1c1e21"><tspan font-weight="700">6</tspan>   I request orders at the broker, each with a limit price, and record them on the watchlist.</text>
+<text x="40" y="1088" font-size="12" fill="#1c1e21"><tspan font-weight="700">7</tspan>   The broker answers: completed, in full or in part, or expired. I record what I saw.</text>
+<text x="40" y="1109" font-size="12" fill="#1c1e21"><tspan font-weight="700">8</tspan>   Splits, dividends and alerts arrive from the broker on their own. Each becomes a fact on the watchlist.</text>
+<text x="900" y="934" font-size="14" font-weight="600" fill="#0f766e">Suggestions, not rules: nothing here is refused</text>
+<text x="900" y="962" font-size="11.5" fill="#1c1e21">•  Watch a company before buying it.</text>
+<text x="900" y="984" font-size="11.5" fill="#1c1e21">•  Buy at review time.</text>
+<text x="900" y="1006" font-size="11.5" fill="#1c1e21">•  Stay within the paycheck plus spare cash.</text>
+<text x="900" y="1028" font-size="11.5" fill="#1c1e21">•  Each exception goes through and is marked, so the next</text>
+<text x="912" y="1044" font-size="11.5" fill="#1c1e21">review shows it.</text>
+<text x="900" y="1074" font-size="14" font-weight="600" fill="#be185d">Outside, and not in my control</text>
+<text x="900" y="1098" font-size="11.5" fill="#1c1e21">•  The market: prices, news, and what companies do.</text>
+<text x="900" y="1120" font-size="11.5" fill="#1c1e21">•  The broker: my money and shares, and whether an order completes.</text>
+<text x="40" y="1198" font-size="14" font-weight="600" fill="#1c1e21">Three models of the same routine</text>
+<text x="560" y="1198" font-size="11.5" font-weight="700" fill="#1c1e21">Three records</text>
+<text x="850" y="1198" font-size="11.5" font-weight="700" fill="#1c1e21">One record per company</text>
+<text x="1130" y="1198" font-size="11.5" font-weight="700" fill="#1c1e21">One watchlist (this diagram)</text>
+<line x1="40" y1="1207" x2="1420" y2="1207" stroke="#d1d5db"/>
+<text x="300" y="1228" font-size="11.5" fill="#374151">A review</text>
+<text x="560" y="1228" font-size="11.5" fill="#1c1e21">its own record</text>
+<text x="850" y="1228" font-size="11.5" fill="#1c1e21">a fact on each company</text>
+<text x="1130" y="1228" font-size="11.5" fill="#1c1e21">a fact on the watchlist</text>
+<text x="300" y="1249" font-size="11.5" fill="#374151">The paycheck budget</text>
+<text x="560" y="1249" font-size="11.5" fill="#1c1e21">checked on the review</text>
+<text x="850" y="1249" font-size="11.5" fill="#1c1e21">seen only on the report</text>
+<text x="1130" y="1249" font-size="11.5" fill="#1c1e21">held in the record itself</text>
+<text x="300" y="1270" font-size="11.5" fill="#374151">One company's history</text>
+<text x="560" y="1270" font-size="11.5" fill="#1c1e21">spread over three records</text>
+<text x="850" y="1270" font-size="11.5" fill="#1c1e21">in one place</text>
+<text x="1130" y="1270" font-size="11.5" fill="#1c1e21">picked out of one long history</text>
+<text x="300" y="1291" font-size="11.5" fill="#374151">Size over the years</text>
+<text x="560" y="1291" font-size="11.5" fill="#1c1e21">three small kinds of record</text>
+<text x="850" y="1291" font-size="11.5" fill="#1c1e21">many small records</text>
+<text x="1130" y="1291" font-size="11.5" fill="#1c1e21">one record that only grows</text>
+<text x="300" y="1312" font-size="11.5" fill="#374151">Best for</text>
+<text x="560" y="1312" font-size="11.5" fill="#1c1e21">deciding this paycheck</text>
+<text x="850" y="1312" font-size="11.5" fill="#1c1e21">following one company</text>
+<text x="1130" y="1312" font-size="11.5" fill="#1c1e21">seeing the routine as one story</text>
 </svg>
