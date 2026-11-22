@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 1286" width="1460" height="1286" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="13">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arrow-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ca3af" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1460" height="1286" fill="#ffffff"/>
+<text x="730" y="34" text-anchor="middle" font-size="18" font-weight="600" fill="#1c1e21">Tonight: my evening routine as one record, the Week</text>
+<text x="730" y="56" text-anchor="middle" font-size="13" fill="#6b7280">a single aggregate, one per week, decided by me · three things outside: the college, Stephen and life · 12 scenarios, 6 of them real</text>
+<text x="730" y="76" text-anchor="middle" font-size="12" fill="#6b7280">yellow: me and my helper · pale: the record, with its five parts · green: the suggestion, a view · pink: outside · one real rule in purple; the rest are suggestions</text>
+<rect x="20" y="1108" width="1420" height="158" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+<rect x="20" y="806" width="1420" height="288" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+<rect x="60" y="116" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4" data-card="1"/>
+<text x="145" y="146.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Me</text>
+<text x="145" y="165.25" text-anchor="middle" font-size="11.5" fill="#44403c">goal: use each evening well;</text>
+<text x="145" y="180.25" text-anchor="middle" font-size="11.5" fill="#44403c">never miss a Sunday</text>
+<rect x="420" y="116" width="240" height="86" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.4" data-card="1"/>
+<text x="540" y="146.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Tonight's suggestion</text>
+<text x="540" y="165.25" text-anchor="middle" font-size="11" fill="#44403c">from the dates, tomorrow's review,</text>
+<text x="540" y="180.25" text-anchor="middle" font-size="11" fill="#44403c">neglect, my time and my mood</text>
+<rect x="850" y="116" width="170" height="86" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.4" data-card="1"/>
+<text x="935" y="146.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">AI helper</text>
+<text x="935" y="165.25" text-anchor="middle" font-size="11.5" fill="#44403c">finishes the homework</text>
+<text x="935" y="180.25" text-anchor="middle" font-size="11.5" fill="#44403c">when time runs out</text>
+<rect x="1160" y="250" width="240" height="80" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4" data-card="1"/>
+<text x="1280" y="277.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">The college</text>
+<text x="1280" y="296.25" text-anchor="middle" font-size="11.5" fill="#44403c">homework every Sunday,</text>
+<text x="1280" y="311.25" text-anchor="middle" font-size="11.5" fill="#44403c">a project every three months</text>
+<rect x="1160" y="346" width="240" height="80" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4" data-card="1"/>
+<text x="1280" y="373.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Stephen</text>
+<text x="1280" y="392.25" text-anchor="middle" font-size="11" fill="#44403c">expects something each working</text>
+<text x="1280" y="407.25" text-anchor="middle" font-size="11" fill="#44403c">morning; sometimes away</text>
+<rect x="1160" y="442" width="240" height="80" rx="10" fill="#fbcfe8" stroke="#db2777" stroke-width="1.4" data-card="1"/>
+<text x="1280" y="469.25" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1e21">Life</text>
+<text x="1280" y="488.25" text-anchor="middle" font-size="11.5" fill="#44403c">work runs late, friends,</text>
+<text x="1280" y="503.25" text-anchor="middle" font-size="11.5" fill="#44403c">tiredness, mood</text>
+<rect x="60" y="280" width="1000" height="268" rx="12" fill="#fef9c3" data-card="1"/>
+<path d="M72,280 L1048,280 Q1060,280 1060,292 L1060,304 L60,304 L60,292 Q60,280 72,280 Z" fill="#fde68a"/>
+<line x1="60" y1="304" x2="1060" y2="304" stroke="#a16207" stroke-width="1"/>
+<rect x="60" y="280" width="1000" height="268" rx="12" fill="none" stroke="#a16207" stroke-width="2.6"/>
+<text x="560" y="296" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.4" fill="#92400e">THE ONE RECORD · ONE PER WEEK</text>
+<text x="560" y="332" text-anchor="middle" font-size="21" font-weight="700" fill="#1c1e21">Week</text>
+<text x="560" y="350" text-anchor="middle" font-size="11.5" fill="#44403c">decided by me · tonight's plan, this week's homework, tomorrow's review, and the two side tracks</text>
+<rect x="80" y="364" width="184" height="118" rx="7" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" data-part="1"/>
+<path d="M87,364 L257,364 Q264,364 264,371 L264,386 L80,386 L80,371 Q80,364 87,364 Z" fill="#dbeafe"/>
+<text x="172" y="379" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">TONIGHT</text>
+<text x="172" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">time: evening, weekend day</text>
+<text x="172" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">lost: work, friends, tired</text>
+<text x="172" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">picked: one kind of work</text>
+<text x="172" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">why: date, review, free, mood</text>
+<rect x="274" y="364" width="184" height="118" rx="7" fill="#ffffff" stroke="#ea580c" stroke-width="1.2" data-part="1"/>
+<path d="M281,364 L451,364 Q458,364 458,371 L458,386 L274,386 L274,371 Q274,364 281,364 Z" fill="#ffedd5"/>
+<text x="366" y="379" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">COLLEGE</text>
+<text x="366" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">homework due Sunday</text>
+<text x="366" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">project due in some weeks</text>
+<text x="366" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">finished by me, or with AI</text>
+<text x="366" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">submitted</text>
+<rect x="468" y="364" width="184" height="118" rx="7" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" data-part="1"/>
+<path d="M475,364 L645,364 Q652,364 652,371 L652,386 L468,386 L468,371 Q468,364 475,364 Z" fill="#ede9fe"/>
+<text x="560" y="379" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">DESIGN PRACTICE</text>
+<text x="560" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">something ready to show</text>
+<text x="560" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">nothing to discuss</text>
+<text x="560" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">skipped: Stephen away</text>
+<text x="560" y="459" text-anchor="middle" font-size="10.5" fill="#1c1e21">none: not a working day</text>
+<rect x="662" y="364" width="184" height="118" rx="7" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" data-part="1"/>
+<path d="M669,364 L839,364 Q846,364 846,371 L846,386 L662,386 L662,371 Q662,364 669,364 Z" fill="#ccfbf1"/>
+<text x="754" y="379" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">LLM PRACTICE</text>
+<text x="754" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">picked tonight</text>
+<text x="754" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">nights since last picked</text>
+<text x="754" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">flagged: a week without it</text>
+<rect x="856" y="364" width="184" height="118" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" data-part="1"/>
+<path d="M863,364 L1033,364 Q1040,364 1040,371 L1040,386 L856,386 L856,371 Q856,364 863,364 Z" fill="#dcfce7"/>
+<text x="948" y="379" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.1" fill="#1c1e21">HOME PROJECTS</text>
+<text x="948" y="408" text-anchor="middle" font-size="10.5" fill="#1c1e21">picked tonight</text>
+<text x="948" y="425" text-anchor="middle" font-size="10.5" fill="#1c1e21">in the mood, noted</text>
+<text x="948" y="442" text-anchor="middle" font-size="10.5" fill="#1c1e21">flagged: a week without it</text>
+<text x="560" y="506" text-anchor="middle" font-size="10.5" font-weight="700" font-style="italic" fill="#7e22ce">the one real rule: this week's homework is in by Sunday, never late</text>
+<text x="560" y="524" text-anchor="middle" font-size="10.5" font-style="italic" fill="#0f766e">everything else is a suggestion: I can pick anything, and the next suggestion adapts</text>
+<polyline points="418,159 232,159" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="325" y="153" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>  suggests</text>
+<polyline points="540,278 540,204" fill="none" stroke="#9ca3af" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#arrow-grey)"/>
+<text x="548" y="246" font-size="11" fill="#6b7280">built from the week</text>
+<polyline points="145,204 145,278" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="153" y="246" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">3</tspan>  I pick tonight</text>
+<polyline points="935,204 935,278" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="943" y="246" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">5</tspan>  finishes it</text>
+<polyline points="1158,290 1062,290" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1110" y="284" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">1</tspan>  sets dates</text>
+<polyline points="1158,386 1062,386" fill="none" stroke="#374151" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="1110" y="380" text-anchor="middle" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">6</tspan>  in, or away</text>
+<polyline points="1158,482 1062,482" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arrow-red)"/>
+<text x="1110" y="476" text-anchor="middle" font-size="11.5" fill="#b91c1c"><tspan font-weight="700">!</tspan> takes time</text>
+<text x="40" y="588" font-size="14" font-weight="600" fill="#1c1e21">Scenarios: what can happen, and the part of the week that answers it</text>
+<rect x="620" y="576" width="34" height="16" rx="5" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+<text x="664" y="588" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">6</tspan>  happened to me</text>
+<rect x="800" y="576" width="34" height="16" rx="5" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="844" y="588" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">6</tspan>  could happen: to check against my real routine</text>
+<rect x="40" y="610" width="60" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="70" y="621.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">College</text>
+<rect x="40" y="630" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="55" cy="645" r="9" fill="#0d9488"/>
+<text x="55" y="648.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">1</text>
+<text x="70" y="649" font-size="11" font-weight="700" fill="#1c1e21">Sunday, homework not done</text>
+<text x="52" y="665" font-size="10" fill="#374151">everything else is dropped:</text>
+<text x="52" y="677" font-size="10" fill="#374151">homework only, until submitted</text>
+<rect x="272" y="610" width="60" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="302" y="621.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">College</text>
+<rect x="272" y="630" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="287" cy="645" r="9" fill="#0d9488"/>
+<text x="287" y="648.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">4</text>
+<text x="302" y="649" font-size="11" font-weight="700" fill="#1c1e21">Homework runs long</text>
+<text x="284" y="665" font-size="10" fill="#374151">twice the time I planned:</text>
+<text x="284" y="677" font-size="10" fill="#374151">the rest with AI help; never late</text>
+<rect x="504" y="610" width="108" height="16" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1" data-chip="1"/>
+<text x="558" y="621.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Design practice</text>
+<rect x="504" y="630" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="519" cy="645" r="9" fill="#0d9488"/>
+<text x="519" y="648.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">2</text>
+<text x="534" y="649" font-size="11" font-weight="700" fill="#1c1e21">Nothing for Stephen</text>
+<text x="516" y="665" font-size="10" fill="#374151">a working morning, nothing ready:</text>
+<text x="516" y="677" font-size="10" fill="#374151">I tell him: nothing to discuss</text>
+<rect x="736" y="610" width="108" height="16" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1" data-chip="1"/>
+<text x="790" y="621.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Design practice</text>
+<rect x="736" y="630" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="751" cy="645" r="9" fill="#0d9488"/>
+<text x="751" y="648.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">6</text>
+<text x="766" y="649" font-size="11" font-weight="700" fill="#1c1e21">Stephen is away</text>
+<text x="748" y="665" font-size="10" fill="#374151">no review tomorrow morning:</text>
+<text x="748" y="677" font-size="10" fill="#374151">skipped; the evening is freed</text>
+<rect x="968" y="610" width="90" height="16" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1" data-chip="1"/>
+<text x="1013" y="621.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">LLM practice</text>
+<rect x="968" y="630" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="983" cy="645" r="9" fill="#0d9488"/>
+<text x="983" y="648.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">3</text>
+<text x="998" y="649" font-size="11" font-weight="700" fill="#1c1e21">A week without practice</text>
+<text x="980" y="665" font-size="10" fill="#374151">no LLM work, no home project:</text>
+<text x="980" y="677" font-size="10" fill="#374151">the track is flagged, and moves up</text>
+<rect x="1200" y="610" width="60" height="16" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1" data-chip="1"/>
+<text x="1230" y="621.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Tonight</text>
+<rect x="1200" y="630" width="200" height="54" rx="7" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3" data-card="1"/>
+<circle cx="1215" cy="645" r="9" fill="#0d9488"/>
+<text x="1215" y="648.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">5</text>
+<text x="1230" y="649" font-size="11" font-weight="700" fill="#1c1e21">The evening is lost</text>
+<text x="1212" y="665" font-size="10" fill="#374151">work ran late, friends, too tired:</text>
+<text x="1212" y="677" font-size="10" fill="#374151">marked lost; tomorrow re-planned</text>
+<rect x="40" y="706" width="60" height="16" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1" data-chip="1"/>
+<text x="70" y="717.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Tonight</text>
+<rect x="40" y="726" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="55" cy="741" r="9" fill="#d97706"/>
+<text x="55" y="744.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">7</text>
+<text x="70" y="745" font-size="11" font-weight="700" fill="#1c1e21">Mood on a due night</text>
+<text x="52" y="761" font-size="10" fill="#374151">a game idea on homework night:</text>
+<text x="52" y="773" font-size="10" fill="#374151">the suggestion warns; I decide</text>
+<rect x="272" y="706" width="60" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="302" y="717.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">College</text>
+<rect x="272" y="726" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="287" cy="741" r="9" fill="#d97706"/>
+<text x="287" y="744.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">8</text>
+<text x="302" y="745" font-size="11" font-weight="700" fill="#1c1e21">Project plus homework</text>
+<text x="284" y="761" font-size="10" fill="#374151">the quarter ends on a Sunday:</text>
+<text x="284" y="773" font-size="10" fill="#374151">two due dates in one week</text>
+<rect x="504" y="706" width="60" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="534" y="717.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">College</text>
+<rect x="504" y="726" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="519" cy="741" r="9" fill="#d97706"/>
+<text x="519" y="744.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">9</text>
+<text x="534" y="745" font-size="11" font-weight="700" fill="#1c1e21">The college moves a date</text>
+<text x="516" y="761" font-size="10" fill="#374151">a deadline changes mid-week:</text>
+<text x="516" y="773" font-size="10" fill="#374151">new date; tonight is re-suggested</text>
+<rect x="736" y="706" width="60" height="16" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1" data-chip="1"/>
+<text x="766" y="717.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Tonight</text>
+<rect x="736" y="726" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="751" cy="741" r="9" fill="#d97706"/>
+<text x="751" y="744.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">10</text>
+<text x="766" y="745" font-size="11" font-weight="700" fill="#1c1e21">A whole weekend day</text>
+<text x="748" y="761" font-size="10" fill="#374151">time for more than one track:</text>
+<text x="748" y="773" font-size="10" fill="#374151">a split is allowed, and marked</text>
+<rect x="968" y="706" width="60" height="16" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1" data-chip="1"/>
+<text x="998" y="717.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">College</text>
+<rect x="968" y="726" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="983" cy="741" r="9" fill="#d97706"/>
+<text x="983" y="744.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">11</text>
+<text x="998" y="745" font-size="11" font-weight="700" fill="#1c1e21">Homework done early</text>
+<text x="980" y="761" font-size="10" fill="#374151">submitted by Wednesday:</text>
+<text x="980" y="773" font-size="10" fill="#374151">the rest of the week is free</text>
+<rect x="1200" y="706" width="108" height="16" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1" data-chip="1"/>
+<text x="1254" y="717.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1c1e21">Design practice</text>
+<rect x="1200" y="726" width="200" height="54" rx="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" stroke-dasharray="5 3" data-card="1"/>
+<circle cx="1215" cy="741" r="9" fill="#d97706"/>
+<text x="1215" y="744.6" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">12</text>
+<text x="1230" y="745" font-size="11" font-weight="700" fill="#1c1e21">No working day tomorrow</text>
+<text x="1212" y="761" font-size="10" fill="#374151">a holiday, or a Friday night:</text>
+<text x="1212" y="773" font-size="10" fill="#374151">design practice loses its pull</text>
+<text x="40" y="834" font-size="14" font-weight="600" fill="#1c1e21">What happens, in order</text>
+<text x="40" y="862" font-size="12" fill="#1c1e21"><tspan font-weight="700">1</tspan>   The college sets the homework, due every Sunday, and now and then a project.</text>
+<text x="40" y="883" font-size="12" fill="#1c1e21"><tspan font-weight="700">2</tspan>   Each evening the tool builds a suggestion from the dates, tomorrow's review, neglected tracks, my time and my mood.</text>
+<text x="40" y="904" font-size="12" fill="#1c1e21"><tspan font-weight="700">3</tspan>   I pick what tonight is for. Usually one track for the whole evening: a suggestion, not a rule.</text>
+<text x="40" y="925" font-size="12" fill="#1c1e21"><tspan font-weight="700">4</tspan>   I do the work. Nothing is logged: this is a plan for tonight, not a diary.</text>
+<text x="40" y="946" font-size="12" fill="#1c1e21"><tspan font-weight="700">5</tspan>   The homework goes in before Sunday ends. If it runs long, the rest is finished with AI help.</text>
+<text x="40" y="967" font-size="12" fill="#1c1e21"><tspan font-weight="700">6</tspan>   On working mornings I review with Stephen, or tell him there is nothing to discuss.</text>
+<text x="40" y="1002" font-size="14" font-weight="600" fill="#1c1e21">What it remembers, and nothing more</text>
+<text x="40" y="1026" font-size="11.5" fill="#1c1e21">•  Whether this week's homework is submitted, and when the project is due.</text>
+<text x="40" y="1046" font-size="11.5" fill="#1c1e21">•  Whether something is ready for the next review.</text>
+<text x="40" y="1066" font-size="11.5" fill="#1c1e21">•  How many nights since each side track was last picked.</text>
+<text x="900" y="834" font-size="14" font-weight="600" fill="#0f766e">How tonight's suggestion is made: a proposed order</text>
+<text x="900" y="862" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">1</tspan>   Homework, when Sunday is close and it isn't submitted.</text>
+<text x="922" y="878" font-size="11.5" fill="#1c1e21">On Sunday this is the rule, not a suggestion.</text>
+<text x="900" y="900" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">2</tspan>   Design practice, when tomorrow is a working day and</text>
+<text x="922" y="916" font-size="11.5" fill="#1c1e21">nothing is ready for Stephen.</text>
+<text x="900" y="938" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">3</tspan>   A side track that has gone a week without being picked.</text>
+<text x="900" y="960" font-size="11.5" fill="#1c1e21"><tspan font-weight="700">4</tspan>   Whatever I'm in the mood for: a home project, or LLM</text>
+<text x="922" y="976" font-size="11.5" fill="#1c1e21">practice when there's free time.</text>
+<text x="900" y="1004" font-size="11.5" font-style="italic" fill="#6b7280">The order is my proposal. Tell me where it is wrong.</text>
+<text x="40" y="1136" font-size="14" font-weight="600" fill="#1c1e21">Two models of the same routine</text>
+<text x="600" y="1136" font-size="11.5" font-weight="700" fill="#1c1e21">Four records</text>
+<text x="1010" y="1136" font-size="11.5" font-weight="700" fill="#1c1e21">One record: the Week (this diagram)</text>
+<line x1="40" y1="1145" x2="1420" y2="1145" stroke="#d1d5db"/>
+<text x="300" y="1166" font-size="11.5" fill="#374151">The Sunday rule</text>
+<text x="600" y="1166" font-size="11.5" fill="#1c1e21">lives on the assignment</text>
+<text x="1010" y="1166" font-size="11.5" fill="#1c1e21">lives on the week</text>
+<text x="300" y="1187" font-size="11.5" fill="#374151">The three-month project</text>
+<text x="600" y="1187" font-size="11.5" fill="#1c1e21">its own assignment, any length</text>
+<text x="1010" y="1187" font-size="11.5" fill="#1c1e21">carried from one week to the next</text>
+<text x="300" y="1208" font-size="11.5" fill="#374151">A week without practice</text>
+<text x="600" y="1208" font-size="11.5" fill="#1c1e21">counted on the track</text>
+<text x="1010" y="1208" font-size="11.5" fill="#1c1e21">seen inside one week only</text>
+<text x="300" y="1229" font-size="11.5" fill="#374151">Tonight's plan</text>
+<text x="600" y="1229" font-size="11.5" fill="#1c1e21">its own record, one per night</text>
+<text x="1010" y="1229" font-size="11.5" fill="#1c1e21">a part of the week</text>
+<text x="300" y="1250" font-size="11.5" fill="#374151">Best for</text>
+<text x="600" y="1250" font-size="11.5" fill="#1c1e21">dates and people with their own life</text>
+<text x="1010" y="1250" font-size="11.5" fill="#1c1e21">seeing the whole week at a glance</text>
+</svg>
